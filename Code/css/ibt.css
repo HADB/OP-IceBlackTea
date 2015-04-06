@@ -61,21 +61,21 @@ div {
     }
 
     .game-1.page-1 .title-1-1 {
-        left: 11%;
+        left: 14%;
         top: 21%;
-        width: 50%;
+        width: 46%;
     }
 
     .game-1.page-1 .box {
         left: 59%;
-        top: 11%;
+        top: 9%;
         width: 35%;
     }
 
     .game-1.page-1 .rule {
         left: 12%;
         top: 28%;
-        width: 85%;
+        width: 75%;
     }
 
     .game-1.page-1 .start {
@@ -85,9 +85,9 @@ div {
     }
 
     .game-1.page-1 .scoreboard {
-        left: 5%;
+        left: 7%;
         bottom: 4%;
-        width: 90%;
+        width: 86%;
     }
 
     .game-1.page-1 .hand {
