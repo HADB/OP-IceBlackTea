@@ -1,0 +1,133 @@
+﻿html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #FFF;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+}
+
+div {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.page {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+    .page img {
+        position: absolute;
+    }
+
+.hide {
+    display: none;
+}
+
+.game-1 {
+    background-image: url('../img/background.jpg');
+}
+
+    .game-1.page-1 .logo {
+        left: 1%;
+        top: 1%;
+        width: 25%;
+    }
+
+    .game-1.page-1 .mission {
+        left: 5%;
+        top: 15%;
+        width: 42%;
+    }
+
+
+    .game-1.page-1 .number-1 {
+        left: 45%;
+        top: 10%;
+        width: 20%;
+    }
+
+    .game-1.page-1 .title-1-1 {
+        left: 11%;
+        top: 21%;
+        width: 50%;
+    }
+
+    .game-1.page-1 .box {
+        left: 59%;
+        top: 11%;
+        width: 35%;
+    }
+
+    .game-1.page-1 .rule {
+        left: 12%;
+        top: 28%;
+        width: 85%;
+    }
+
+    .game-1.page-1 .start {
+        left: 16%;
+        top: 66%;
+        width: 68%;
+    }
+
+    .game-1.page-1 .scoreboard {
+        left: 5%;
+        bottom: 4%;
+        width: 90%;
+    }
+
+    .game-1.page-1 .hand {
+        left: 74%;
+        top: 74%;
+        width: 12%;
+    }
+
+    .game-1.page-2 .logo {
+        left: 1%;
+        top: 1%;
+        width: 25%;
+    }
+
+    .game-1.page-2 .title-1-2 {
+        left: 24%;
+        top: 8%;
+        width: 65%;
+    }
+
+    .game-1.page-2 .ice-black-tea {
+        left: 24%;
+        top: 18%;
+        width: 50%;
+    }
+
+    .game-1.page-2 .button-left {
+        left: 12%;
+        top: 64%;
+        width: 34%;
+    }
+
+    .game-1.page-2 .button-right {
+        left: 54%;
+        top: 64%;
+        width: 34%;
+    }
+
+    .game-1.page-2 .button-ok {
+        left: 24%;
+        top: 86%;
+        width: 52%;
+    }
