@@ -71,7 +71,7 @@ $(function () {
     });
 
     $('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchend pointerup', function (event) {
-	$('#clickaudio')[0].play();
+
         $(this).attr("src", "img/button-click.png");
     });
 
