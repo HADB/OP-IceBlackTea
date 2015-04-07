@@ -131,3 +131,15 @@ div {
         top: 86%;
         width: 52%;
     }
+
+    .game-1.page-2 .using-time {
+        background-color: #FFFFFF;
+        opacity: 0.6;
+        font-weight: bold;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        text-align: center;
+        font-size: 50px;
+        color: #000000;
+    }

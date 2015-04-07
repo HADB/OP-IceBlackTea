@@ -7,9 +7,9 @@
 
     isAnimating: false,
 
-    clickCount: 0,
+    game1ClickCount: 0,
 
-    clickUsingTime: 0,
+    game1ClickUsingTime: 0,
 
     game1end: false,
 
@@ -52,12 +52,11 @@ $(function () {
 
     $(".game-1.page-2 .button-left,.game-1.page-2 .button-right").on('touchstart', function () {
         IBT.game1end = false;
-        if (IBT.clickCount == 0) {
-            startTimer();
+        if (IBT.game1ClickCount == 0) {
+            startGame1Timer();
         }
-        IBT.clickCount++;
+        IBT.game1ClickCount++;
         $(this).attr("src", "img/button-down.png");
-        console.log(IBT.clickCount);
     });
 
     $('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchend', function (event) {
@@ -67,41 +66,45 @@ $(function () {
 
     $(".game-1.page-2 .button-ok").singleTap(function () {
         IBT.game1end = true;
-        if (IBT.clickCount == 32) {
+        if (IBT.game1ClickCount == 32) {
             var level = "E";
-            if (IBT.clickUsingTime < 6.1) {
+            if (IBT.game1ClickUsingTime < 6.1) {
                 level = "S";
             }
-            else if (IBT.clickUsingTime < 7.1) {
+            else if (IBT.game1ClickUsingTime < 7.1) {
                 level = "A";
             }
-            else if (IBT.clickUsingTime < 8.1) {
+            else if (IBT.game1ClickUsingTime < 8.1) {
                 level = "B";
             }
-            else if (IBT.clickUsingTime < 9.1) {
+            else if (IBT.game1ClickUsingTime < 9.1) {
                 level = "C";
             }
-            else if (IBT.clickUsingTime < 10.1) {
+            else if (IBT.game1ClickUsingTime < 10.1) {
                 level = "D";
             }
-            alert("耗时" + IBT.clickUsingTime.toFixed(1) + "秒，等级为" + level);
+            alert("耗时" + IBT.game1ClickUsingTime.toFixed(2) + "秒，等级为" + level);
         }
         else {
-            alert(IBT.clickUsingTime.toFixed(1) + "秒点击了" + IBT.clickCount + "次，挑战失败！");
+            alert(IBT.game1ClickUsingTime.toFixed(2) + "秒点击了" + IBT.game1ClickCount + "次，挑战失败！");
             IBT.pageMove(IBT.effects.fade, IBT.directions.down, 1);
         }
-        IBT.clickCount = 0;
-        IBT.clickUsingTime = 0;
+        IBT.game1ClickCount = 0;
+        IBT.game1ClickUsingTime = 0;
     });
 });
 
 
-function startTimer() {
+function startGame1Timer() {
     setTimeout(function () {
-        IBT.clickUsingTime += 0.1;
-        console.log(IBT.clickUsingTime);
         if (!IBT.game1end) {
-            startTimer();
+            IBT.game1ClickUsingTime += 0.01;
+            $(".game-1.page-2 .using-time").html(IBT.game1ClickUsingTime.toFixed(2));
+            startGame1Timer();
         }
-    }, 100);
+        else {
+            IBT.game1ClickUsingTime = 0;
+            $(".game-1.page-2 .using-time").html("0.00");
+        }
+    }, 10);
 }
