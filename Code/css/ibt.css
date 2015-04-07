@@ -134,15 +134,15 @@ div {
     }
 
     .game-1.page-2 .using-time {
-        background-color: #FFFFFF;
-        opacity: 0.6;
-        font-weight: bold;
-        position: absolute;
         width: 100%;
         top: 50%;
         text-align: center;
-        font-size: 50px;
-        color: #000000;
+        position: absolute;
+        font-weight: bold;
+        font-size: 60px;
+        color: #fff;
+        -webkit-text-stroke: #000 3px;
+        text-shadow: 5px 5px 5px #000;
     }
 
     .game-1.page-100 .button-return {

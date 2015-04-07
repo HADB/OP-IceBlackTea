@@ -117,12 +117,12 @@ function startGame1Timer() {
     setTimeout(function () {
         if (!IBT.game1end) {
             IBT.game1ClickUsingTime += 0.01;
-            $(".game-1.page-2 .using-time").html(IBT.game1ClickUsingTime.toFixed(2));
+            $(".game-1.page-2 .using-time").html(IBT.game1ClickUsingTime.toFixed(2) + "s");
             startGame1Timer();
         }
         else {
             IBT.game1ClickUsingTime = 0;
-            $(".game-1.page-2 .using-time").html("0.00");
+            $(".game-1.page-2 .using-time").html("0.00s");
         }
     }, 10);
 }
