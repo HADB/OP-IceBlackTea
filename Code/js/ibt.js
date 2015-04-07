@@ -73,7 +73,9 @@ $(function () {
             $(this).attr("src", "img/button-down.png");
         }
     });
-
+	$('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchmove', function (event) {
+        return false;
+    });
     $('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchend pointerup', function (event) {
         $(this).attr("src", "img/button-click.png");
     });
