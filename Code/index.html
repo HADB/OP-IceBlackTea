@@ -10,13 +10,87 @@
     <meta name="format-detection" content="email=no">
     <link rel="stylesheet" type="text/css" href="css/haoest.min.css" />
     <link rel="stylesheet" type="text/css" href="css/ibt.css" />
+    <!--Style For Loading-->
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background-color: #FFF;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+
+        div {
+            position: absolute;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .page {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+            .page img {
+                position: absolute;
+            }
+
+        .hide {
+            display: none;
+        }
+
+        .page-0 {
+            background-color: #dc292d;
+        }
+
+            .page-0 .loading {
+                width: 30%;
+                height: 40%;
+                position: absolute;
+                left: 50%;
+                top: 40%;
+                margin-top: -20%;
+                margin-left: -15%;
+                font-size: 20%;
+                color: #000;
+            }
+
+            .page-0 .loading-img {
+                width: 100%;
+                margin-bottom: 10%;
+            }
+
+            .page-0 .loading div {
+                position: absolute;
+                width: 100%;
+                top: 50%;
+                text-align: center;
+                font-size: 20px;
+            }
+    </style>
 </head>
 
-<body>
-<audio id="clickaudio"  src="a.wav" >
-您的浏览器不支持 audio 标签。
-</audio>
-    <div class="page game-1 page-1">
+<body onload="IBT.loadComplete();">
+    <audio id="clickaudio" src="a.wav"></audio>
+    <div class="page page-0">
+        <div class="loading">
+            <img class="loading-img ani-rotateRight ani-iteration-infinite" src="img/loading.png" />
+            <div>Loading</div>
+        </div>
+    </div>
+    <div class="page game-1 page-1 hide">
         <img class="logo ani-fadeIn" src="img/logo.png" />
         <img class="mission ani-moveLeftRightSpring ani-delay500" src="img/mission.png" />
         <img class="number-1 ani-moveDownUpSpring ani-delay800" src="img/number-1.png" />
