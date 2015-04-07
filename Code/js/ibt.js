@@ -50,7 +50,7 @@ $(function () {
         IBT.pageMove(IBT.effects.fade, IBT.directions.up, 1);
     });
 
-    $(".game-1.page-2 .button-left,.game-1.page-2 .button-right").singleTap(function () {
+    $(".game-1.page-2 .button-left,.game-1.page-2 .button-right").on('touchstart', function () {
         IBT.game1end = false;
         if (IBT.clickCount == 0) {
             startTimer();
@@ -60,7 +60,7 @@ $(function () {
         console.log(IBT.clickCount);
     });
 
-    $(document).on('touchend MSPointerUp pointerup', function (event) {
+    $('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchend', function (event) {
         $(".game-1.page-2 .button-left").attr("src", "img/button-click.png");
         $(".game-1.page-2 .button-right").attr("src", "img/button-click.png");
     });
