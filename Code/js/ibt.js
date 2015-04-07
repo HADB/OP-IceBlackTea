@@ -73,9 +73,11 @@ $(function () {
             $(this).attr("src", "img/button-down.png");
         }
     });
-	$('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchmove', function (event) {
+
+    $('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchmove', function (event) {
         return false;
     });
+
     $('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchend pointerup', function (event) {
         $(this).attr("src", "img/button-click.png");
     });
@@ -106,8 +108,8 @@ $(function () {
         }
         else {
             IBT.game1result = IBT.results.Failed;
-            alert("点击了" + IBT.game1ClickCount + "次，挑战失败！请重新进行挑战！");
             IBT.pageMove(IBT.effects.fade, 1);
+            alert("点击了" + IBT.game1ClickCount + "次，挑战失败！请重新进行挑战！");
         }
         IBT.game1ClickCount = 0;
         IBT.game1ClickUsingTime = 0;
