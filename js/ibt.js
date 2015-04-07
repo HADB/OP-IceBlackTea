@@ -58,17 +58,18 @@ $(function () {
     });
 
     $(".game-1.page-2 .button-left,.game-1.page-2 .button-right").on('touchstart', function () {
-        IBT.game1end = false;
         if (IBT.game1ClickCount == 0) {
+            IBT.game1end = false;
             startGame1Timer();
         }
-        IBT.game1ClickCount++;
-        $(this).attr("src", "img/button-down.png");
+        if (!IBT.game1end) {
+            IBT.game1ClickCount++;
+            $(this).attr("src", "img/button-down.png");
+        }
     });
 
-    $('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchend', function (event) {
-        $(".game-1.page-2 .button-left").attr("src", "img/button-click.png");
-        $(".game-1.page-2 .button-right").attr("src", "img/button-click.png");
+    $('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchend pointerup', function (event) {
+        $(this).attr("src", "img/button-click.png");
     });
 
     $(".game-1.page-2 .button-ok").singleTap(function () {
