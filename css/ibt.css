@@ -37,6 +37,7 @@ div {
     display: none;
 }
 
+/*游戏一*/
 .game-1 {
     background-image: url('../img/background.jpg');
 }
@@ -131,3 +132,80 @@ div {
         top: 86%;
         width: 52%;
     }
+
+    .game-1.page-2 .using-time {
+        width: 100%;
+        top: 50%;
+        text-align: center;
+        position: absolute;
+        font-weight: bold;
+        font-size: 60px;
+        color: #fff;
+        -webkit-text-stroke: #000 3px;
+        text-shadow: 5px 5px 5px #000;
+    }
+
+    .game-1.page-100 .button-return {
+        left: 12%;
+        top: 72%;
+        width: 34%;
+    }
+
+    .game-1.page-100 .button-next {
+        left: 54%;
+        top: 72%;
+        width: 34%;
+    }
+
+    .game-1.page-100 .logo {
+        left: 1%;
+        top: 1%;
+        width: 25%;
+    }
+
+        .game-1.page-100 .logo.right {
+            left: auto;
+            right: 1%;
+            top: 1%;
+            width: 25%;
+        }
+
+    .game-1.page-100 .result {
+        left: 10%;
+        top: 14%;
+        width: 80%;
+    }
+
+    .game-1.page-100 .using-time {
+        position: absolute;
+        top: 1%;
+        font-weight: bold;
+        font-size: 60px;
+        color: #fff;
+        -webkit-text-stroke: #000 3px;
+        text-shadow: 5px 5px 5px #000;
+    }
+
+        .game-1.page-100 .using-time.s {
+            left: 5%;
+        }
+
+        .game-1.page-100 .using-time.a {
+            left: 5%;
+        }
+
+        .game-1.page-100 .using-time.b {
+            left: 20%;
+        }
+
+        .game-1.page-100 .using-time.c {
+            left: 35%;
+        }
+
+        .game-1.page-100 .using-time.d {
+            left: 50%;
+        }
+
+        .game-1.page-100 .using-time.e {
+            left: 50%;
+        }
