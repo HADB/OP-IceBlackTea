@@ -54,12 +54,12 @@
 
 $(function () {
     $(".game-1.page-1 .start").singleTap(function () {
-	$('#clickaudio')[0].play();
+        $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, 2);
     });
 
     $(".game-1.page-2 .button-left,.game-1.page-2 .button-right").on('touchstart', function () {
-	$('#clickaudio')[0].play();
+        $('#clickaudio')[0].play();
         if (IBT.game1ClickCount == 0) {
             IBT.game1end = false;
             startGame1Timer();
@@ -71,12 +71,11 @@ $(function () {
     });
 
     $('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchend pointerup', function (event) {
-	$('#clickaudio')[0].play();
         $(this).attr("src", "img/button-click.png");
     });
 
     $(".game-1.page-2 .button-ok").singleTap(function () {
-	$('#clickaudio')[0].play();
+        $('#clickaudio')[0].play();
         IBT.game1end = true;
         if (IBT.game1ClickCount == 32) {
             if (IBT.game1ClickUsingTime < 6.1) {
@@ -109,12 +108,12 @@ $(function () {
     });
 
     $(".game-1.page-100 .button-return").singleTap(function () {
-	$('#clickaudio')[0].play();
+        $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, IBT.resultReturnPageNumber);
     });
 
     $(".game-1.page-100 .button-next").singleTap(function () {
-	$('#clickaudio')[0].play();
+        $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, IBT.resultNextPageNumber);
     });
 });
