@@ -52,7 +52,7 @@
     },
 
     loadComplete: function () {
-        IBT.pageMove(IBT.effects.fade, 1);
+        IBT.pageMove(IBT.effects.fade, 3);
     }
 };
 
@@ -60,6 +60,10 @@ $(function () {
     $(".game-1.page-1 .start").singleTap(function () {
         $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, 2);
+    });
+	$(".game-2.page-3 .start").singleTap(function () {
+        $('#clickaudio')[0].play();
+        IBT.pageMove(IBT.effects.fade, 4);
     });
 
     $(".game-1.page-2 .button-left,.game-1.page-2 .button-right").on('touchstart pointerdown', function () {

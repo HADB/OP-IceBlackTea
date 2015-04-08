@@ -170,3 +170,136 @@
         .game-1.page-100 .using-time.e {
             left: 50%;
         }
+.game-2 {
+    background-image: url('../img/background.jpg');
+}
+
+    .game-2.page-3 .logo {
+        left: 1%;
+        top: 1%;
+        width: 25%;
+    }
+
+    .game-2.page-3 .mission {
+        left: 5%;
+        top: 15%;
+        width: 42%;
+    }
+
+
+    .game-2.page-3 .number-1 {
+        left: 45%;
+        top: 10%;
+        width: 20%;
+    }
+
+    .game-2.page-3 .title-1-1 {
+        left: 14%;
+        top: 21%;
+        width: 46%;
+    }
+
+    .game-2.page-3 .box {
+        left: 59%;
+        top: 9%;
+        width: 35%;
+    }
+
+    .game-2.page-3 .rule {
+        left: 12%;
+        top: 28%;
+        width: 75%;
+    }
+
+    .game-2.page-3 .start {
+        left: 20%;
+        top: 60%;
+        width: 60%;
+    }
+
+    .game-2.page-3 .scoreboard {
+        left: 7%;
+        bottom: 4%;
+        width: 86%;
+    }
+
+    .game-2.page-3 .hand {
+        left: 60%;
+        top: 72%;
+        width: 12%;
+    }
+	.game-2.page-4{
+		background:url('../img/background-g2.png');
+		background-size:cover;
+	}
+	.game-2.page-4 .tishi-g2{
+		left: 0;
+        top: 0;
+        width: 50%;
+	}
+	.game-2.page-4 .shizhong-g2{
+		left: 46%;
+        top: 8%;
+		width:25%;
+	}
+	.game-2.page-4 .juxing-g2{
+	/*	background:url('../img/juxing-g2.png');
+		background-size:cover;*/
+		border:5px solid white;
+		left: 5%;
+        top: 22%;
+		width:88%;
+		height:60%;
+	}
+	.game-2.page-4 .juxing-g2 .items{
+		position:relative;
+		float:left;
+		width:22%;
+		height:24%;
+		margin-left:2%;
+	}
+	.game-2.page-4 .juxing-g2 .items.red2000{
+		background:url('../img/red2000.png');
+		background-size:contain;
+		background-repeat:no-repeat;
+
+	}
+	.game-2.page-4 .juxing-g2 .items.greenz{
+		background:url('../img/greenz.png');
+		background-size:contain;
+		background-repeat:no-repeat;
+
+
+	}
+	.game-2.page-4 .juxing-g2 .items.green250{
+		background:url('../img/green250.png');
+		background-size:contain;
+		background-repeat:no-repeat;
+
+	}
+	.game-2.page-4 .juxing-g2 .items.redz{
+		background:url('../img/redz.png');
+		background-size:contain;
+		background-repeat:no-repeat;
+
+	}
+	.game-2.page-4 .juxing-g2 .items.redg{
+		background:url('../img/redg.png');
+		background-size:contain;
+		background-repeat:no-repeat;
+
+	}
+	.game-2.page-4 .juxing-g2 .items.redp{
+		background:url('../img/redp.png');
+		background-size:contain;
+		background-repeat:no-repeat;
+
+	}
+	.game-2.page-4 .juxing-g2 .unselected{
+		border:1px solid transparent;
+	}
+	.game-2.page-4 .button-ok{
+		left: 24%;
+        top: 85%;
+        width: 52%;
+	}
