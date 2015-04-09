@@ -72,7 +72,7 @@ var IBT = {
     },
 
     loadComplete: function () {
-        IBT.pageMove(IBT.effects.fade, 3);
+        IBT.pageMove(IBT.effects.fade, 99);
     }
 };
 

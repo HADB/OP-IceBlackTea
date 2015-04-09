@@ -381,4 +381,38 @@
 
         .game-2.page-100 .using-time.e {
             left: 50%;
-        }
+        }		
+.page.page-99{
+	background-image:url('../img/rank.jpg');
+}
+	.page.page-99 .rank{
+		width:90%;
+		height:45%;
+		left:5%;
+		top:28%;
+	}
+		.page.page-99 .rank .rank-table{
+			border: 1px solid darkred;
+			width:100%;
+			height:100%;
+		}
+			.page.page-99 .rank .rank-table .rank-th-tr{
+				background-color:#c0504e;
+				color:white;
+			}
+			.page.page-99 .rank .rank-table .rank-td-tr{
+				
+			}
+			.odd-tr{
+				background-color:white;
+				color:black;
+			}
+			.even-tr{
+				background-color:#e5b9b8;
+				color:black;
+			}
+
+			.page.page-99 .rank .rank-table td{
+			border: 1px solid #bf524f;
+			height:9%;
+			}
