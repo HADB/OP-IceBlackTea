@@ -1,15 +1,15 @@
 ﻿var userId;
 var gameId;
-var m = [{ "name": "red2000", "num": 3 }, { "name": "redz", "num": 2 },{ "name": "redg", "num": 2 },{ "name": "green250", "num": 2 }];
-var mselected = [{ "name": "red2000", "selectednum": 0 }, { "name": "redz", "selectednum": 0 },{ "name": "redg", "selectednum": 0 },{ "name": "green250", "selectednum": 0 }];
+var m = [{ "name": "red2000", "num": 3 }, { "name": "redz", "num": 2 }, { "name": "redg", "num": 2 }, { "name": "green250", "num": 2 }];
+var mselected = [{ "name": "red2000", "selectednum": 0 }, { "name": "redz", "selectednum": 0 }, { "name": "redg", "selectednum": 0 }, { "name": "green250", "selectednum": 0 }];
 var mnums = 0;
 var mm = new Array();
 var selectednums = 0;
 var t;//timer
 var watertimer;
 var sstop = 0;//结束标记
-var ssuccess=0;
-var sfail=0;
+var ssuccess = 0;
+var sfail = 0;
 var divs = new Array();//所有图片的div集合
 var rands = new Array();//16个不相同的0-15随机数组成的数组
 for (var i = 0; i < m.length; i++) {
@@ -18,9 +18,9 @@ for (var i = 0; i < m.length; i++) {
 }
 var IBT = {
     gamePoint: 0,
-	
-    perGamePoint:{ game1:0, game2 : 0, game3 : 0, game4 : 0 },
-    
+
+    perGamePoint: { game1: 0, game2: 0, game3: 0, game4: 0 },
+
     currentPageNumber: 0,
 
     effects: { moveUp: 1, moveDown: 2, fade: 3 },
@@ -34,15 +34,15 @@ var IBT = {
     game1ClickCount: 0,
 
     game1ClickUsingTime: 0,
-	
-    game2ClickUsingTime:0,
+
+    game2ClickUsingTime: 0,
 
     game1end: false,
 
     game1result: null,
-	
+
     game2result: null,
-    
+
     resultReturnPageNumber: 1,
 
     resultNextPageNumber: 1,
@@ -79,23 +79,33 @@ var IBT = {
 
     loadComplete: function () {
         checkGameAndUser();
-        IBT.pageMove(IBT.effects.fade, 1);
+        IBT.pageMove(IBT.effects.fade, 1000);
     }
 };
 
 $(function () {
-    game2Init();
-    $(".game-1.page-1 .start").singleTap(function () {
+    $(".page-1000 .button-enter-game").singleTap(function () {
+        $('#clickaudio')[0].play();
+        IBT.pageMove(IBT.effects.fade, 1001);
+    });
+
+    $(".page-1000 .button-rank-list").singleTap(function () {
+        $('#clickaudio')[0].play();
+        IBT.pageMove(IBT.effects.fade, 1002);
+    });
+
+    $(".page-1001 .button-mission-1").singleTap(function () {
+        $('#clickaudio')[0].play();
+        IBT.pageMove(IBT.effects.fade, 1);
+    });
+
+    $(".page-1 .start").singleTap(function () {
         $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, 2);
     });
-    $(".game-2.page-3 .start").singleTap(function () {
-        $('#clickaudio')[0].play();
-        IBT.pageMove(IBT.effects.fade, 4);
-        timerGo();
-    });
 
-    $(".game-1.page-2 .button-left,.game-1.page-2 .button-right").on('touchstart pointerdown', function () {
+
+    $(".page-2 .button-left,.page-2 .button-right").on('touchstart pointerdown', function () {
         $('#clickaudio')[0].play();
         if (IBT.game1ClickCount == 0) {
             IBT.game1end = false;
@@ -106,14 +116,16 @@ $(function () {
             $(this).attr("src", "img/button-down.png");
         }
     });
-    $('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchmove', function (event) {
+
+    $('.page-2 .button-left,.page-2 .button-right').on('touchmove', function (event) {
         return false;
     });
-    $('.game-1.page-2 .button-left,.game-1.page-2 .button-right').on('touchend pointerup', function (event) {
+
+    $('.page-2 .button-left,.page-2 .button-right').on('touchend pointerup', function (event) {
         $(this).attr("src", "img/button-click.png");
     });
 
-    $(".game-1.page-2 .button-ok").on('touchstart pointerdown', function () {
+    $(".page-2 .button-ok").on('touchstart pointerdown', function () {
         $('#clickaudio')[0].play();
         IBT.game1end = true;
         if (IBT.game1ClickCount == 32) {
@@ -136,58 +148,69 @@ $(function () {
                 IBT.game1result = IBT.results.E;
             }
             submitScore();//提交分数;
-            showResult(IBT.game1result, IBT.game1ClickUsingTime.toFixed(2), 1, 3)
+            showResult(IBT.game1result, 101, IBT.game1ClickUsingTime.toFixed(2), 1, 9999)//提示下周挑战游戏2
         }
         else {
             IBT.game1result = IBT.results.Failed;
-            alert("点击了" + IBT.game1ClickCount + "次，挑战失败！请重新进行挑战！");
             IBT.pageMove(IBT.effects.fade, 1);
+            alert("点击了" + IBT.game1ClickCount + "次，挑战失败！请重新进行挑战！");
         }
         IBT.game1ClickCount = 0;
         IBT.game1ClickUsingTime = 0;
     });
 
-    $(".game-1.page-100 .button-return").singleTap(function () {
+    $(".page-3 .start").singleTap(function () {
+        $('#clickaudio')[0].play();
+        IBT.pageMove(IBT.effects.fade, 4);
+        timerGo();
+    });
+
+    $(".page-101 .button-return").singleTap(function () {
         $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, IBT.resultReturnPageNumber);
     });
 
-    $(".game-1.page-100 .button-next").singleTap(function () {
+    $(".page-101 .button-next").singleTap(function () {
         $('#clickaudio')[0].play();
-        IBT.pageMove(IBT.effects.fade, IBT.resultNextPageNumber);
+        if (IBT.resultNextPageNumber == 9999) {
+            alert("请在下周挑战该任务！");
+        }
+        else {
+            IBT.pageMove(IBT.effects.fade, IBT.resultNextPageNumber);
+        }
     });
-	
-    $(".game-2.page-101 .button-return").singleTap(function () {
+
+    $(".page-102 .button-return").singleTap(function () {
         $('#clickaudio')[0].play();
         game2Reset();
         IBT.pageMove(IBT.effects.fade, IBT.resultReturnPageNumber);
     });
 
-    $(".game-2.page-101 .button-next").singleTap(function () {
+    $(".page-102 .button-next").singleTap(function () {
         $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, IBT.resultNextPageNumber);
     });
 
     $("#testrank").singleTap(function () {
-        IBT.pageMove(IBT.effects.fade,99);
+        IBT.pageMove(IBT.effects.fade, 1002);
         $.get("/api/game/item/leaders", { "gameId": gameId, "start": 0, "size": 10 }, function (data, textStatus) {
             var itemSize = 0;
-            if (data == null){
+            if (data == null) {
 
             }
-            else{
+            else {
                 itemSize = data.length;
                 var trs = "<tr class='rank-th-tr'><th style='width: 10%;' align='center'>序号</th><th style='width: 18%;' align='center'>昵称</th><th style='width: 14%;' align='center'>成绩1</th><th style='width: 14%;' align='center'>成绩2</th><th style='width: 14%;' align='center'>成绩3</th><th style='width: 14%;' align='center'>成绩4</th><th style='width: 14%;' align='center'>总成绩</th></tr>";
                 $.each(data, function (i, item) {
-                
+
                     var trColor;
                     if (i % 2 == 0) {
                         trColor = "even-tr";
                     } else {
                         trColor = "odd-tr";
                     }
-                    trs += "<tr class='" + trColor + " rank-td-tr'><td align='center'>" + (i + 1) + "</td>" + "<td align='center'>" + formatPalyerName(item.userName == null ? item.userId : item.userName) + "</td>" + "<td align='center'>" + item.point + "</td><td align='center'>无</td><td align='center'>无</td><td align='center'>无</td><td align='center'>" + (((item.timeUsed)/100.00).toFixed(2)) + "</td></tr>";
-                   
+                    trs += "<tr class='" + trColor + " rank-td-tr'><td align='center'>" + (i + 1) + "</td>" + "<td align='center'>" + formatPalyerName(item.userName == null ? item.userId : item.userName) + "</td>" + "<td align='center'>" + item.point + "</td><td align='center'>无</td><td align='center'>无</td><td align='center'>无</td><td align='center'>" + (((item.timeUsed) / 100.00).toFixed(2)) + "</td></tr>";
+
                 });
                 $(".rank-table").append(trs);
 
@@ -201,95 +224,57 @@ function startGame1Timer() {
     setTimeout(function () {
         if (!IBT.game1end) {
             IBT.game1ClickUsingTime += 0.01;
-            $(".game-1.page-2 .using-time").html(IBT.game1ClickUsingTime.toFixed(2) + "s");
+            $(".page-2 .using-time").html(IBT.game1ClickUsingTime.toFixed(2) + "s");
             startGame1Timer();
         }
         else {
             IBT.game1ClickUsingTime = 0;
-            $(".game-1.page-2 .using-time").html("0.00s");
+            $(".page-2 .using-time").html("0.00s");
         }
     }, 10);
 }
 
 //显示结果页面，目前不清楚4个游戏的结果页面是否通用，如果不通用，还需要进行一些修改
-function showResult(result, text, returnPageNumber, nextPageNumber) {
+function showResult(result, pageNumber, text, returnPageNumber, nextPageNumber) {
     IBT.resultReturnPageNumber = returnPageNumber;
     IBT.resultNextPageNumber = nextPageNumber;
-    IBT.pageMove(IBT.effects.fade, 100);
-    $(".game-1.page-100 .using-time").html(text + "s");
+    IBT.pageMove(IBT.effects.fade, pageNumber);
+    $(".page-" + pageNumber + " .using-time").html(text + "s");
     switch (result) {
         case IBT.results.S:
-            $(".game-1.page-100 .result").attr("src", "img/score-s.png");
-            $(".game-1.page-100 .logo").addClass("right");
-            $(".game-1.page-100 .using-time").removeClass().addClass("using-time s");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-s.png");
+            $(".page-" + pageNumber + " .logo").addClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time s");
             break;
         case IBT.results.A:
-            $(".game-1.page-100 .result").attr("src", "img/score-a.png");
-            $(".game-1.page-100 .logo").addClass("right");
-            $(".game-1.page-100 .using-time").removeClass().addClass("using-time a");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-a.png");
+            $(".page-" + pageNumber + " .logo").addClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time a");
             break;
         case IBT.results.B:
-            $(".game-1.page-100 .result").attr("src", "img/score-b.png");
-            $(".game-1.page-100 .logo").addClass("right");
-            $(".game-1.page-100 .using-time").removeClass().addClass("using-time b");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-b.png");
+            $(".page-" + pageNumber + " .logo").addClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time b");
             break;
         case IBT.results.C:
-            $(".game-1.page-100 .result").attr("src", "img/score-c.png");
-            $(".game-1.page-100 .logo").removeClass("right");
-            $(".game-1.page-100 .using-time").removeClass().addClass("using-time c");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-c.png");
+            $(".page-" + pageNumber + " .logo").removeClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time c");
             break;
         case IBT.results.D:
-            $(".game-1.page-100 .result").attr("src", "img/score-d.png");
-            $(".game-1.page-100 .logo").removeClass("right");
-            $(".game-1.page-100 .using-time").removeClass().addClass("using-time d");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-d.png");
+            $(".page-" + pageNumber + " .logo").removeClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time d");
             break;
         case IBT.results.E:
-            $(".game-1.page-100 .result").attr("src", "img/score-e.png");
-            $(".game-1.page-100 .logo").removeClass("right");
-            $(".game-1.page-100 .using-time").removeClass().addClass("using-time e");
-            break;
-    }
-}
-function showResultGame2(result, text, returnPageNumber, nextPageNumber) {
-    IBT.resultReturnPageNumber = returnPageNumber;
-    IBT.resultNextPageNumber = nextPageNumber;
-    IBT.pageMove(IBT.effects.fade, 101);
-    $(".game-2.page-101 .using-time").html(text + "s");
-    switch (result) {
-        case IBT.results.S:
-            $(".game-2.page-101 .result").attr("src", "img/score-s.png");
-            $(".game-2.page-101 .logo").addClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time s");
-            break;
-        case IBT.results.A:
-            $(".game-2.page-101 .result").attr("src", "img/score-a.png");
-            $(".game-2.page-101 .logo").addClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time a");
-            break;
-        case IBT.results.B:
-            $(".game-2.page-101 .result").attr("src", "img/score-b.png");
-            $(".game-2.page-101 .logo").addClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time b");
-            break;
-        case IBT.results.C:
-            $(".game-2.page-101 .result").attr("src", "img/score-c.png");
-            $(".game-2.page-101 .logo").removeClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time c");
-            break;
-        case IBT.results.D:
-            $(".game-2.page-101 .result").attr("src", "img/score-d.png");
-            $(".game-2.page-101 .logo").removeClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time d");
-            break;
-        case IBT.results.E:
-            $(".game-2.page-101 .result").attr("src", "img/score-e.png");
-            $(".game-2.page-101 .logo").removeClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time e");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-e.png");
+            $(".page-" + pageNumber + " .logo").removeClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time e");
             break;
     }
 }
 
-function game2Init(){
+function game2Init() {
     for (var i = 0; i < 16; i++) {
         divs[i] = $('.items').eq(i);
         rands[i] = -1;
@@ -308,13 +293,13 @@ function game2Init(){
                     $(this).removeClass("unselected");
                     $(this).addClass("selected");
                     if (selectednums == mnums && selectednums != 0) {
-                        ssuccess=1;
-                        sstop=1;
+                        ssuccess = 1;
+                        sstop = 1;
                     }
                 }
             }
             else {
-                sfail=1;
+                sfail = 1;
                 sstop = 1;
             }
         })
@@ -322,20 +307,20 @@ function game2Init(){
 }
 
 function timerPlus() {//TODO:游戏胜负判断是否在这里？，参照watergame再修改
-    if(sstop==1){
+    if (sstop == 1) {
 
-        if(ssuccess==1){
+        if (ssuccess == 1) {
             clearInterval(t);
             game2Success();
         }
-        else if(sfail==1){
+        else if (sfail == 1) {
             clearInterval(t);
             game2Fail();
         }
     }
     else {
         IBT.game2ClickUsingTime = IBT.game2ClickUsingTime + 0.01;
-        $(".game-2.page-4 .using-time").text(IBT.game2ClickUsingTime.toFixed(2)+" S");
+        $(".game-2.page-4 .using-time").text(IBT.game2ClickUsingTime.toFixed(2) + " S");
     }
 }
 function timerGo() {
@@ -368,7 +353,7 @@ function setRandomDivs() {
         $('.juxing-g2').append(divs[rands[i]]);
     }
 }
-function game2Success(){
+function game2Success() {
     if (IBT.game2ClickUsingTime < 9) {
         IBT.game2result = IBT.results.S;
     }
@@ -387,39 +372,37 @@ function game2Success(){
     else {
         IBT.game2result = IBT.results.E;
     }
-    showResultGame2(IBT.game2result, IBT.game2ClickUsingTime.toFixed(2), 3, 5)
+    showResultGame(IBT.game2result, 102, IBT.game2ClickUsingTime.toFixed(2), 3, 5)
 }
-function game2Fail(){
+function game2Fail() {
     alert("你失败了，请重新挑战！");
     game2Reset();//延时
     IBT.pageMove(IBT.effects.fade, 3);
 }
-function game2Reset(){
+function game2Reset() {
     IBT.game2ClickUsingTime = 0.0;
     sstop = 0;
-    ssuccess=0;
-    sfail=0;
+    ssuccess = 0;
+    sfail = 0;
     selectednums = 0;
     random16();
     setRandomDivs();
 }
-function setGamePoints(){
+function setGamePoints() {
     IBT.perGamePoint.game1 = 25.00 - (25.00 / (11.00)).toFixed(2) * IBT.game1ClickUsingTime.toFixed(2);
     IBT.gamePoint = IBT.perGamePoint.game1;//TODO:+game2...
-}		
-function getUrlParam(name)
-{
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+}
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    if (r!=null) return unescape(r[2]); return null; //返回参数值
-} 
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}
 
 function checkGameAndUser() {
     userId = getUrlParam("userId");
     gameId = "fourgame_dian_0409";
     if (userId == null) {
         alert("无法确认用户身份，请从微信中访问我们.");
-
     }
     else {
         checkGame();
@@ -427,27 +410,24 @@ function checkGameAndUser() {
     }
 }
 
-	
+function checkGame() {
+    $.get("http://121.41.105.146/api/game/id", { id: gameId }, function (data, textStatus) {
 
-	
-function checkGame(){
-    $.get("http://121.41.105.146/api/game/id", {id:gameId}, function (data, textStatus){
-			
-        if(data==null){
+        if (data == null) {
             alert("游戏不存在");
         }
     });
 }
-	
-function checkUser(){
-    $.get("http://121.41.105.146/api/game/item", {userId:userId, game:gameId}, function (data, textStatus){
-			
-        if(data!=null){
+
+function checkUser() {
+    $.get("http://121.41.105.146/api/game/item", { userId: userId, game: gameId }, function (data, textStatus) {
+
+        if (data != null) {
             alert("你已经参加过了疯狂点点点。");
-            window.location = "./fourgame_dian_leaderboard.htm?userId=" + userId 
+            window.location = "./fourgame_dian_leaderboard.htm?userId=" + userId
         }
     });
-		
+
 }
 function formatPalyerName(strName) {
     if (strName.length > 8) {
