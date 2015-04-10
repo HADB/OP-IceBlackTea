@@ -14,6 +14,58 @@
         width: 50%;
     }
 
+.page-1001 {
+    background-image: url('../img/game-list-bg.jpg');
+}
+
+    .page-1001 .button-mission-1 {
+        left: 5%;
+        top: 28%;
+        width: 50%;
+    }
+
+    .page-1001 .button-mission-2 {
+        left: 5%;
+        top: 46%;
+        width: 50%;
+    }
+
+    .page-1001 .button-mission-3 {
+        left: 5%;
+        top: 63%;
+        width: 50%;
+    }
+
+    .page-1001 .button-mission-4 {
+        left: 5%;
+        top: 81%;
+        width: 50%;
+    }
+
+    .page-1001 .lock-1 {
+        width: 8%;
+        left: 40%;
+        top: 29%;
+    }
+
+    .page-1001 .lock-2 {
+        width: 8%;
+        left: 40%;
+        top: 47%;
+    }
+
+    .page-1001 .lock-3 {
+        width: 8%;
+        left: 40%;
+        top: 64%;
+    }
+
+    .page-1001 .lock-4 {
+        width: 8%;
+        left: 40%;
+        top: 82%;
+    }
+
 /*游戏一*/
 .page-1 {
     background-image: url('../img/background.jpg');
@@ -126,70 +178,74 @@
         text-shadow: 5px 5px 5px #000;
     }
 
-.page-100 .button-return {
-    left: 12%;
-    top: 72%;
-    width: 34%;
+.page-101 {
+    background-image: url('../img/background.jpg');
 }
 
-.page-100 .button-next {
-    left: 54%;
-    top: 72%;
-    width: 34%;
-}
+    .page-101 .button-return {
+        left: 12%;
+        top: 72%;
+        width: 34%;
+    }
 
-.page-100 .logo {
-    left: 1%;
-    top: 1%;
-    width: 25%;
-}
+    .page-101 .button-next {
+        left: 54%;
+        top: 72%;
+        width: 34%;
+    }
 
-    .page-100 .logo.right {
-        left: auto;
-        right: 1%;
+    .page-101 .logo {
+        left: 1%;
         top: 1%;
         width: 25%;
     }
 
-.page-100 .result {
-    left: 10%;
-    top: 14%;
-    width: 80%;
-}
+        .page-101 .logo.right {
+            left: auto;
+            right: 1%;
+            top: 1%;
+            width: 25%;
+        }
 
-.page-100 .using-time {
-    position: absolute;
-    top: 1%;
-    font-weight: bold;
-    font-size: 60px;
-    color: #fff;
-    -webkit-text-stroke: #000 3px;
-    text-shadow: 5px 5px 5px #000;
-}
-
-    .page-100 .using-time.s {
-        left: 5%;
+    .page-101 .result {
+        left: 10%;
+        top: 14%;
+        width: 80%;
     }
 
-    .page-100 .using-time.a {
-        left: 5%;
+    .page-101 .using-time {
+        position: absolute;
+        top: 1%;
+        font-weight: bold;
+        font-size: 60px;
+        color: #fff;
+        -webkit-text-stroke: #000 3px;
+        text-shadow: 5px 5px 5px #000;
     }
 
-    .page-100 .using-time.b {
-        left: 20%;
-    }
+        .page-101 .using-time.s {
+            left: 5%;
+        }
 
-    .page-100 .using-time.c {
-        left: 35%;
-    }
+        .page-101 .using-time.a {
+            left: 5%;
+        }
 
-    .page-100 .using-time.d {
-        left: 50%;
-    }
+        .page-101 .using-time.b {
+            left: 20%;
+        }
 
-    .page-100 .using-time.e {
-        left: 50%;
-    }
+        .page-101 .using-time.c {
+            left: 35%;
+        }
+
+        .page-101 .using-time.d {
+            left: 50%;
+        }
+
+        .page-101 .using-time.e {
+            left: 50%;
+        }
 
 .game-2 {
     background-image: url('../img/background.jpg');
@@ -348,38 +404,38 @@
         width: 52%;
     }
 
-.game-2.page-101 .button-return {
+.game-2.page-102 .button-return {
     left: 12%;
     top: 72%;
     width: 34%;
 }
 
-.game-2.page-101 .button-next {
+.game-2.page-102 .button-next {
     left: 54%;
     top: 72%;
     width: 34%;
 }
 
-.game-2.page-101 .logo {
+.game-2.page-102 .logo {
     left: 1%;
     top: 1%;
     width: 25%;
 }
 
-    .game-2.page-101 .logo.right {
+    .game-2.page-102 .logo.right {
         left: auto;
         right: 1%;
         top: 1%;
         width: 25%;
     }
 
-.game-2.page-101 .result {
+.game-2.page-102 .result {
     left: 10%;
     top: 14%;
     width: 80%;
 }
 
-.game-2.page-101 .using-time {
+.game-2.page-102 .using-time {
     position: absolute;
     top: 1%;
     font-weight: bold;
@@ -389,53 +445,53 @@
     text-shadow: 5px 5px 5px #000;
 }
 
-    .game-2.page-101 .using-time.s {
+    .game-2.page-102 .using-time.s {
         left: 5%;
     }
 
-    .game-2.page-101 .using-time.a {
+    .game-2.page-102 .using-time.a {
         left: 5%;
     }
 
-    .game-2.page-101 .using-time.b {
+    .game-2.page-102 .using-time.b {
         left: 20%;
     }
 
-    .game-2.page-101 .using-time.c {
+    .game-2.page-102 .using-time.c {
         left: 35%;
     }
 
-    .game-2.page-101 .using-time.d {
+    .game-2.page-102 .using-time.d {
         left: 50%;
     }
 
-    .game-2.page-101 .using-time.e {
+    .game-2.page-102 .using-time.e {
         left: 50%;
     }
 
-.page.page-99 {
+.page.page-1002 {
     background-image: url('../img/rank.jpg');
 }
 
-    .page.page-99 .rank {
+    .page.page-1002 .rank {
         width: 90%;
         height: 45%;
         left: 5%;
         top: 28%;
     }
 
-        .page.page-99 .rank .rank-table {
+        .page.page-1002 .rank .rank-table {
             border: 1px solid darkred;
             width: 100%;
             height: 100%;
         }
 
-            .page.page-99 .rank .rank-table .rank-th-tr {
+            .page.page-1002 .rank .rank-table .rank-th-tr {
                 background-color: #c0504e;
                 color: white;
             }
 
-            .page.page-99 .rank .rank-table .rank-td-tr {
+            .page.page-1002 .rank .rank-table .rank-td-tr {
             }
 
 .odd-tr {
@@ -448,7 +504,7 @@
     color: black;
 }
 
-.page.page-99 .rank .rank-table td {
+.page.page-1002 .rank .rank-table td {
     border: 1px solid #bf524f;
     height: 9%;
 }

@@ -86,12 +86,17 @@ var IBT = {
 $(function () {
     $(".page-1000 .button-enter-game").singleTap(function () {
         $('#clickaudio')[0].play();
-        IBT.pageMove(IBT.effects.fade, 1);
+        IBT.pageMove(IBT.effects.fade, 1001);
     });
 
     $(".page-1000 .button-rank-list").singleTap(function () {
         $('#clickaudio')[0].play();
-        IBT.pageMove(IBT.effects.fade, 99);
+        IBT.pageMove(IBT.effects.fade, 1002);
+    });
+
+    $(".page-1001 .button-mission-1").singleTap(function () {
+        $('#clickaudio')[0].play();
+        IBT.pageMove(IBT.effects.fade, 1);
     });
 
     $(".page-1 .start").singleTap(function () {
@@ -143,7 +148,7 @@ $(function () {
                 IBT.game1result = IBT.results.E;
             }
             submitScore();//提交分数;
-            showResult(IBT.game1result, IBT.game1ClickUsingTime.toFixed(2), 1, 9999)//提示下周挑战游戏2
+            showResult(IBT.game1result, 101, IBT.game1ClickUsingTime.toFixed(2), 1, 9999)//提示下周挑战游戏2
         }
         else {
             IBT.game1result = IBT.results.Failed;
@@ -160,12 +165,12 @@ $(function () {
         timerGo();
     });
 
-    $(".page-100 .button-return").singleTap(function () {
+    $(".page-101 .button-return").singleTap(function () {
         $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, IBT.resultReturnPageNumber);
     });
 
-    $(".page-100 .button-next").singleTap(function () {
+    $(".page-101 .button-next").singleTap(function () {
         $('#clickaudio')[0].play();
         if (IBT.resultNextPageNumber == 9999) {
             alert("请在下周挑战该任务！");
@@ -175,19 +180,19 @@ $(function () {
         }
     });
 
-    $(".page-101 .button-return").singleTap(function () {
+    $(".page-102 .button-return").singleTap(function () {
         $('#clickaudio')[0].play();
         game2Reset();
         IBT.pageMove(IBT.effects.fade, IBT.resultReturnPageNumber);
     });
 
-    $(".page-101 .button-next").singleTap(function () {
+    $(".page-102 .button-next").singleTap(function () {
         $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, IBT.resultNextPageNumber);
     });
 
     $("#testrank").singleTap(function () {
-        IBT.pageMove(IBT.effects.fade, 99);
+        IBT.pageMove(IBT.effects.fade, 1002);
         $.get("/api/game/item/leaders", { "gameId": gameId, "start": 0, "size": 10 }, function (data, textStatus) {
             var itemSize = 0;
             if (data == null) {
@@ -230,79 +235,41 @@ function startGame1Timer() {
 }
 
 //显示结果页面，目前不清楚4个游戏的结果页面是否通用，如果不通用，还需要进行一些修改
-function showResult(result, text, returnPageNumber, nextPageNumber) {
+function showResult(result, pageNumber, text, returnPageNumber, nextPageNumber) {
     IBT.resultReturnPageNumber = returnPageNumber;
     IBT.resultNextPageNumber = nextPageNumber;
-    IBT.pageMove(IBT.effects.fade, 100);
-    $(".page-100 .using-time").html(text + "s");
+    IBT.pageMove(IBT.effects.fade, pageNumber);
+    $(".page-" + pageNumber + " .using-time").html(text + "s");
     switch (result) {
         case IBT.results.S:
-            $(".page-100 .result").attr("src", "img/score-s.png");
-            $(".page-100 .logo").addClass("right");
-            $(".page-100 .using-time").removeClass().addClass("using-time s");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-s.png");
+            $(".page-" + pageNumber + " .logo").addClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time s");
             break;
         case IBT.results.A:
-            $(".page-100 .result").attr("src", "img/score-a.png");
-            $(".page-100 .logo").addClass("right");
-            $(".page-100 .using-time").removeClass().addClass("using-time a");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-a.png");
+            $(".page-" + pageNumber + " .logo").addClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time a");
             break;
         case IBT.results.B:
-            $(".page-100 .result").attr("src", "img/score-b.png");
-            $(".page-100 .logo").addClass("right");
-            $(".page-100 .using-time").removeClass().addClass("using-time b");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-b.png");
+            $(".page-" + pageNumber + " .logo").addClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time b");
             break;
         case IBT.results.C:
-            $(".page-100 .result").attr("src", "img/score-c.png");
-            $(".page-100 .logo").removeClass("right");
-            $(".page-100 .using-time").removeClass().addClass("using-time c");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-c.png");
+            $(".page-" + pageNumber + " .logo").removeClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time c");
             break;
         case IBT.results.D:
-            $(".page-100 .result").attr("src", "img/score-d.png");
-            $(".page-100 .logo").removeClass("right");
-            $(".page-100 .using-time").removeClass().addClass("using-time d");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-d.png");
+            $(".page-" + pageNumber + " .logo").removeClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time d");
             break;
         case IBT.results.E:
-            $(".page-100 .result").attr("src", "img/score-e.png");
-            $(".page-100 .logo").removeClass("right");
-            $(".page-100 .using-time").removeClass().addClass("using-time e");
-            break;
-    }
-}
-function showResultGame2(result, text, returnPageNumber, nextPageNumber) {
-    IBT.resultReturnPageNumber = returnPageNumber;
-    IBT.resultNextPageNumber = nextPageNumber;
-    IBT.pageMove(IBT.effects.fade, 101);
-    $(".game-2.page-101 .using-time").html(text + "s");
-    switch (result) {
-        case IBT.results.S:
-            $(".game-2.page-101 .result").attr("src", "img/score-s.png");
-            $(".game-2.page-101 .logo").addClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time s");
-            break;
-        case IBT.results.A:
-            $(".game-2.page-101 .result").attr("src", "img/score-a.png");
-            $(".game-2.page-101 .logo").addClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time a");
-            break;
-        case IBT.results.B:
-            $(".game-2.page-101 .result").attr("src", "img/score-b.png");
-            $(".game-2.page-101 .logo").addClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time b");
-            break;
-        case IBT.results.C:
-            $(".game-2.page-101 .result").attr("src", "img/score-c.png");
-            $(".game-2.page-101 .logo").removeClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time c");
-            break;
-        case IBT.results.D:
-            $(".game-2.page-101 .result").attr("src", "img/score-d.png");
-            $(".game-2.page-101 .logo").removeClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time d");
-            break;
-        case IBT.results.E:
-            $(".game-2.page-101 .result").attr("src", "img/score-e.png");
-            $(".game-2.page-101 .logo").removeClass("right");
-            $(".game-2.page-101 .using-time").removeClass().addClass("using-time e");
+            $(".page-" + pageNumber + " .result").attr("src", "img/score-e.png");
+            $(".page-" + pageNumber + " .logo").removeClass("right");
+            $(".page-" + pageNumber + " .using-time").removeClass().addClass("using-time e");
             break;
     }
 }
@@ -405,7 +372,7 @@ function game2Success() {
     else {
         IBT.game2result = IBT.results.E;
     }
-    showResultGame2(IBT.game2result, IBT.game2ClickUsingTime.toFixed(2), 3, 5)
+    showResultGame(IBT.game2result, 102, IBT.game2ClickUsingTime.toFixed(2), 3, 5)
 }
 function game2Fail() {
     alert("你失败了，请重新挑战！");
