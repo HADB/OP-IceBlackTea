@@ -508,3 +508,21 @@
     border: 1px solid #bf524f;
     height: 9%;
 }
+.game1-level-span{
+	position: absolute;
+	top: 33%;
+	left: 59%;
+	width: 18%;
+	font-size: large;
+	text-align: center;
+	color: white;
+}
+.game1-time-span{
+	position:absolute;
+	top: 33%;
+	left: 77%;
+	width: 18%;
+	font-size: large;
+	text-align: center;
+	color: white;
+}

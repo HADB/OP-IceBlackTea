@@ -40,6 +40,10 @@ var IBT = {
     game1end: false,
 
     game1result: null,
+	
+	game1LevelResult: null,
+	
+	game1TimeResult: 0,//上面的usingtime置零了
 
     game2result: null,
 
@@ -78,7 +82,7 @@ var IBT = {
     },
 
     loadComplete: function () {
-        checkGameAndUser();
+        //checkGameAndUser();
         IBT.pageMove(IBT.effects.fade, 1000);
     }
 };
@@ -91,6 +95,29 @@ $(function () {
 
     $(".page-1000 .button-rank-list").singleTap(function () {
         $('#clickaudio')[0].play();
+        $.get("/api/game/item/leaders", { "gameId": gameId, "start": 0, "size": 10 }, function (data, textStatus) {
+            var itemSize = 0;
+            if (data == null) {
+
+            }
+            else {
+                itemSize = data.length;
+                var trs = "<tr class='rank-th-tr'><th style='width: 10%;' align='center'>序号</th><th style='width: 18%;' align='center'>昵称</th><th style='width: 14%;' align='center'>成绩1</th><th style='width: 14%;' align='center'>成绩2</th><th style='width: 14%;' align='center'>成绩3</th><th style='width: 14%;' align='center'>成绩4</th><th style='width: 14%;' align='center'>总成绩</th></tr>";
+                $.each(data, function (i, item) {
+
+                    var trColor;
+                    if (i % 2 == 0) {
+                        trColor = "even-tr";
+                    } else {
+                        trColor = "odd-tr";
+                    }
+                    trs += "<tr class='" + trColor + " rank-td-tr'><td align='center'>" + (i + 1) + "</td>" + "<td align='center'>" + formatPalyerName(item.userName == null ? item.userId : item.userName) + "</td>" + "<td align='center'>" + item.point + "</td><td align='center'>无</td><td align='center'>无</td><td align='center'>无</td><td align='center'>" + (((item.timeUsed) / 100.00).toFixed(2)) + "</td></tr>";
+
+                });
+                $(".rank-table").append(trs);
+
+            }
+        });
         IBT.pageMove(IBT.effects.fade, 1002);
     });
 
@@ -131,23 +158,30 @@ $(function () {
         if (IBT.game1ClickCount == 32) {
             if (IBT.game1ClickUsingTime < 6.1) {
                 IBT.game1result = IBT.results.S;
+				IBT.game1LevelResult="S";
             }
             else if (IBT.game1ClickUsingTime < 7.1) {
                 IBT.game1result = IBT.results.A;
+				IBT.game1LevelResult="A";
             }
             else if (IBT.game1ClickUsingTime < 8.1) {
                 IBT.game1result = IBT.results.B;
+				IBT.game1LevelResult="B";
             }
             else if (IBT.game1ClickUsingTime < 9.1) {
                 IBT.game1result = IBT.results.C;
+				IBT.game1LevelResult="C";
             }
             else if (IBT.game1ClickUsingTime < 10.1) {
                 IBT.game1result = IBT.results.D;
+				IBT.game1LevelResult="D";
             }
             else {
                 IBT.game1result = IBT.results.E;
+				IBT.game1LevelResult="E";
             }
             submitScore();//提交分数;
+			IBT.game1TimeResult=IBT.game1ClickUsingTime.toFixed(2);
             showResult(IBT.game1result, 101, IBT.game1ClickUsingTime.toFixed(2), 1, 9999)//提示下周挑战游戏2
         }
         else {
@@ -167,13 +201,19 @@ $(function () {
 
     $(".page-101 .button-return").singleTap(function () {
         $('#clickaudio')[0].play();
-        IBT.pageMove(IBT.effects.fade, IBT.resultReturnPageNumber);
+        //IBT.pageMove(IBT.effects.fade, IBT.resultReturnPageNumber);
+		$('.game1-time-span').text(IBT.game1TimeResult+" S");
+		$('.game1-level-span').text(IBT.game1LevelResult);
+		IBT.pageMove(IBT.effects.fade, 1001);
     });
 
     $(".page-101 .button-next").singleTap(function () {
         $('#clickaudio')[0].play();
         if (IBT.resultNextPageNumber == 9999) {
             alert("请在下周挑战该任务！");
+			$('.game1-time-span').text(IBT.game1TimeResult+" S");
+			$('.game1-level-span').text(IBT.game1LevelResult);
+			 IBT.pageMove(IBT.effects.fade, 1001);
         }
         else {
             IBT.pageMove(IBT.effects.fade, IBT.resultNextPageNumber);
@@ -454,7 +494,7 @@ function submitScore() {
         data: JSON.stringify(submitData),
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            alert("保存成功");
+           // alert("保存成功");
             // window.location = "排行榜地址TODO";
         }, // 注意不要在此行增加逗号  
         error: function (e) {
