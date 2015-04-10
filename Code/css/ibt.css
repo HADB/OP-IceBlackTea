@@ -328,38 +328,38 @@
             width: 52%;
         }
 
-    .game-2.page-100 .button-return {
+	.game-2.page-101 .button-return {
         left: 12%;
         top: 72%;
         width: 34%;
     }
 
-    .game-2.page-100 .button-next {
+    .game-2.page-101 .button-next {
         left: 54%;
         top: 72%;
         width: 34%;
     }
 
-    .game-2.page-100 .logo {
+    .game-2.page-101 .logo {
         left: 1%;
         top: 1%;
         width: 25%;
     }
 
-        .game-2.page-100 .logo.right {
+        .game-2.page-101 .logo.right {
             left: auto;
             right: 1%;
             top: 1%;
             width: 25%;
         }
 
-    .game-2.page-100 .result {
+    .game-2.page-101 .result {
         left: 10%;
         top: 14%;
         width: 80%;
     }
 
-    .game-2.page-100 .using-time {
+    .game-2.page-101 .using-time {
         position: absolute;
         top: 1%;
         font-weight: bold;
@@ -369,27 +369,27 @@
         text-shadow: 5px 5px 5px #000;
     }
 
-        .game-2.page-100 .using-time.s {
+        .game-2.page-101 .using-time.s {
             left: 5%;
         }
 
-        .game-2.page-100 .using-time.a {
+        .game-2.page-101 .using-time.a {
             left: 5%;
         }
 
-        .game-2.page-100 .using-time.b {
+        .game-2.page-101 .using-time.b {
             left: 20%;
         }
 
-        .game-2.page-100 .using-time.c {
+        .game-2.page-101 .using-time.c {
             left: 35%;
         }
 
-        .game-2.page-100 .using-time.d {
+        .game-2.page-101 .using-time.d {
             left: 50%;
         }
 
-        .game-2.page-100 .using-time.e {
+        .game-2.page-101 .using-time.e {
             left: 50%;
         }		
 .page.page-99{
