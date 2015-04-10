@@ -1,100 +1,120 @@
-﻿/*游戏一*/
-.game-1 {
+﻿.page-1000 {
+    background-image: url('../img/index-bg.jpg');
+}
+
+    .page-1000 .button-enter-game {
+        top: 63%;
+        left: 5%;
+        width: 50%;
+    }
+
+    .page-1000 .button-rank-list {
+        top: 80%;
+        left: 20%;
+        width: 50%;
+    }
+
+/*游戏一*/
+.page-1 {
     background-image: url('../img/background.jpg');
 }
 
-    .game-1.page-1 .logo {
+    .page-1 .logo {
         left: 1%;
         top: 1%;
         width: 25%;
     }
 
-    .game-1.page-1 .mission {
+    .page-1 .mission {
         left: 5%;
         top: 15%;
         width: 42%;
     }
 
 
-    .game-1.page-1 .number-1 {
+    .page-1 .number-1 {
         left: 45%;
         top: 10%;
         width: 20%;
     }
 
-    .game-1.page-1 .title-1-1 {
+    .page-1 .title-1-1 {
         left: 14%;
         top: 21%;
         width: 46%;
     }
 
-    .game-1.page-1 .box {
+    .page-1 .box {
         left: 59%;
         top: 9%;
         width: 35%;
     }
 
-    .game-1.page-1 .rule {
+    .page-1 .rule {
         left: 12%;
         top: 28%;
         width: 75%;
     }
 
-    .game-1.page-1 .start {
+    .page-1 .start {
         left: 16%;
         top: 66%;
         width: 68%;
     }
 
-    .game-1.page-1 .scoreboard {
+    .page-1 .scoreboard {
         left: 7%;
         bottom: 4%;
         width: 86%;
     }
 
-    .game-1.page-1 .hand {
+    .page-1 .hand {
         left: 74%;
         top: 74%;
         width: 12%;
     }
 
-    .game-1.page-2 .logo {
+.page-2 {
+    background-image: url('../img/background.jpg');
+}
+
+    .page-2 .logo {
         left: 1%;
         top: 1%;
         width: 25%;
     }
 
-    .game-1.page-2 .title-1-2 {
+    .page-2 .title-1-2 {
         left: 24%;
         top: 8%;
         width: 65%;
     }
 
-    .game-1.page-2 .ice-black-tea {
+    .page-2 .ice-black-tea {
         left: 27%;
         top: 18%;
         width: 45%;
     }
 
-    .game-1.page-2 .button-left {
+    .page-2 .button-left {
         left: 12%;
         top: 64%;
         width: 34%;
     }
 
-    .game-1.page-2 .button-right {
+    .page-2 .button-right {
         left: 54%;
         top: 64%;
         width: 34%;
     }
 
-    .game-1.page-2 .button-ok {
+    .page-2 .button-ok {
         left: 24%;
         top: 86%;
         width: 52%;
     }
 
-    .game-1.page-2 .using-time {
+    .page-2 .using-time {
         width: 100%;
         top: 50%;
         text-align: center;
@@ -106,323 +126,329 @@
         text-shadow: 5px 5px 5px #000;
     }
 
-    .game-1.page-100 .button-return {
-        left: 12%;
-        top: 72%;
-        width: 34%;
-    }
+.page-100 .button-return {
+    left: 12%;
+    top: 72%;
+    width: 34%;
+}
 
-    .game-1.page-100 .button-next {
-        left: 54%;
-        top: 72%;
-        width: 34%;
-    }
+.page-100 .button-next {
+    left: 54%;
+    top: 72%;
+    width: 34%;
+}
 
-    .game-1.page-100 .logo {
-        left: 1%;
+.page-100 .logo {
+    left: 1%;
+    top: 1%;
+    width: 25%;
+}
+
+    .page-100 .logo.right {
+        left: auto;
+        right: 1%;
         top: 1%;
         width: 25%;
     }
 
-        .game-1.page-100 .logo.right {
-            left: auto;
-            right: 1%;
-            top: 1%;
-            width: 25%;
-        }
+.page-100 .result {
+    left: 10%;
+    top: 14%;
+    width: 80%;
+}
 
-    .game-1.page-100 .result {
-        left: 10%;
-        top: 14%;
-        width: 80%;
+.page-100 .using-time {
+    position: absolute;
+    top: 1%;
+    font-weight: bold;
+    font-size: 60px;
+    color: #fff;
+    -webkit-text-stroke: #000 3px;
+    text-shadow: 5px 5px 5px #000;
+}
+
+    .page-100 .using-time.s {
+        left: 5%;
     }
 
-    .game-1.page-100 .using-time {
-        position: absolute;
-        top: 1%;
-        font-weight: bold;
-        font-size: 60px;
-        color: #fff;
-        -webkit-text-stroke: #000 3px;
-        text-shadow: 5px 5px 5px #000;
+    .page-100 .using-time.a {
+        left: 5%;
     }
 
-        .game-1.page-100 .using-time.s {
-            left: 5%;
-        }
+    .page-100 .using-time.b {
+        left: 20%;
+    }
 
-        .game-1.page-100 .using-time.a {
-            left: 5%;
-        }
+    .page-100 .using-time.c {
+        left: 35%;
+    }
 
-        .game-1.page-100 .using-time.b {
-            left: 20%;
-        }
+    .page-100 .using-time.d {
+        left: 50%;
+    }
 
-        .game-1.page-100 .using-time.c {
-            left: 35%;
-        }
-
-        .game-1.page-100 .using-time.d {
-            left: 50%;
-        }
-
-        .game-1.page-100 .using-time.e {
-            left: 50%;
-        }
+    .page-100 .using-time.e {
+        left: 50%;
+    }
 
 .game-2 {
     background-image: url('../img/background.jpg');
 }
 
-    .game-2.page-3 .logo {
-        left: 1%;
-        top: 1%;
-        width: 25%;
-    }
-
-    .game-2.page-3 .mission {
-        left: 5%;
-        top: 15%;
-        width: 42%;
-    }
-
-
-    .game-2.page-3 .number-1 {
-        left: 45%;
-        top: 10%;
-        width: 20%;
-    }
-
-    .game-2.page-3 .title-1-1 {
-        left: 14%;
-        top: 21%;
-        width: 46%;
-    }
-
-    .game-2.page-3 .box {
-        left: 59%;
-        top: 9%;
-        width: 35%;
-    }
-
-    .game-2.page-3 .rule {
-        left: 12%;
-        top: 28%;
-        width: 75%;
-    }
-
-    .game-2.page-3 .start {
-        left: 20%;
-        top: 60%;
-        width: 60%;
-    }
-
-    .game-2.page-3 .scoreboard {
-        left: 7%;
-        bottom: 4%;
-        width: 86%;
-    }
-
-    .game-2.page-3 .hand {
-        left: 60%;
-        top: 72%;
-        width: 12%;
-    }
-
-    .game-2.page-4 {
-        background: url('../img/background-g2.png');
-        background-size: cover;
-    }
-
-        .game-2.page-4 .tishi-g2 {
-            left: 0;
-            top: 0;
-            width: 50%;
-        }
-
-        .game-2.page-4 .shizhong-g2 {
-            left: 46%;
-            top: 8%;
-            width: 25%;
-        }
-
-        .game-2.page-4 .using-time {
-            width: 50%;
-            top: 15%;
-            left: 70%;
-            text-align: left;
-            position: absolute;
-            font-weight: bold;
-            font-size: 25px;
-            color: #fff;
-            -webkit-text-stroke: #000 1px;
-            text-shadow: 2px 2px 2px #000;
-        }
-
-        .game-2.page-4 .juxing-g2 {
-            /*	background:url('../img/juxing-g2.png');
-		background-size:cover;*/
-            border: 5px solid white;
-            left: 5%;
-            top: 22%;
-            width: 88%;
-            height: 70%;
-        }
-
-            .game-2.page-4 .juxing-g2 .items {
-                position: relative;
-                float: left;
-                width: 22%;
-                height: 24%;
-                margin-left: 2%;
-            }
-
-                .game-2.page-4 .juxing-g2 .items.red2000 {
-                    background: url('../img/red2000.png');
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                }
-
-                .game-2.page-4 .juxing-g2 .items.greenz {
-                    background: url('../img/greenz.png');
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                }
-
-                .game-2.page-4 .juxing-g2 .items.green250 {
-                    background: url('../img/green250.png');
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                }
-
-                .game-2.page-4 .juxing-g2 .items.redz {
-                    background: url('../img/redz.png');
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                }
-
-                .game-2.page-4 .juxing-g2 .items.redg {
-                    background: url('../img/redg.png');
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                }
-
-                .game-2.page-4 .juxing-g2 .items.redp {
-                    background: url('../img/redp.png');
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                }
-
-            .game-2.page-4 .juxing-g2 .unselected {
-                border: 1px solid transparent;
-            }
-
-            .game-2.page-4 .juxing-g2 .selected {
-                border: 1px solid green;
-            }
-
-        .game-2.page-4 .button-ok {
-            left: 24%;
-            top: 85%;
-            width: 52%;
-        }
-
-	.game-2.page-101 .button-return {
-        left: 12%;
-        top: 72%;
-        width: 34%;
-    }
-
-    .game-2.page-101 .button-next {
-        left: 54%;
-        top: 72%;
-        width: 34%;
-    }
-
-    .game-2.page-101 .logo {
-        left: 1%;
-        top: 1%;
-        width: 25%;
-    }
-
-        .game-2.page-101 .logo.right {
-            left: auto;
-            right: 1%;
-            top: 1%;
-            width: 25%;
-        }
-
-    .game-2.page-101 .result {
-        left: 10%;
-        top: 14%;
-        width: 80%;
-    }
-
-    .game-2.page-101 .using-time {
-        position: absolute;
-        top: 1%;
-        font-weight: bold;
-        font-size: 60px;
-        color: #fff;
-        -webkit-text-stroke: #000 3px;
-        text-shadow: 5px 5px 5px #000;
-    }
-
-        .game-2.page-101 .using-time.s {
-            left: 5%;
-        }
-
-        .game-2.page-101 .using-time.a {
-            left: 5%;
-        }
-
-        .game-2.page-101 .using-time.b {
-            left: 20%;
-        }
-
-        .game-2.page-101 .using-time.c {
-            left: 35%;
-        }
-
-        .game-2.page-101 .using-time.d {
-            left: 50%;
-        }
-
-        .game-2.page-101 .using-time.e {
-            left: 50%;
-        }		
-.page.page-99{
-	background-image:url('../img/rank.jpg');
+.page-3 .logo {
+    left: 1%;
+    top: 1%;
+    width: 25%;
 }
-	.page.page-99 .rank{
-		width:90%;
-		height:45%;
-		left:5%;
-		top:28%;
-	}
-		.page.page-99 .rank .rank-table{
-			border: 1px solid darkred;
-			width:100%;
-			height:100%;
-		}
-			.page.page-99 .rank .rank-table .rank-th-tr{
-				background-color:#c0504e;
-				color:white;
-			}
-			.page.page-99 .rank .rank-table .rank-td-tr{
-				
-			}
-			.odd-tr{
-				background-color:white;
-				color:black;
-			}
-			.even-tr{
-				background-color:#e5b9b8;
-				color:black;
-			}
 
-			.page.page-99 .rank .rank-table td{
-			border: 1px solid #bf524f;
-			height:9%;
-			}
+.page-3 .mission {
+    left: 5%;
+    top: 15%;
+    width: 42%;
+}
+
+
+.page-3 .number-1 {
+    left: 45%;
+    top: 10%;
+    width: 20%;
+}
+
+.page-3 .title-1-1 {
+    left: 14%;
+    top: 21%;
+    width: 46%;
+}
+
+.page-3 .box {
+    left: 59%;
+    top: 9%;
+    width: 35%;
+}
+
+.page-3 .rule {
+    left: 12%;
+    top: 28%;
+    width: 75%;
+}
+
+.page-3 .start {
+    left: 20%;
+    top: 60%;
+    width: 60%;
+}
+
+.page-3 .scoreboard {
+    left: 7%;
+    bottom: 4%;
+    width: 86%;
+}
+
+.page-3 .hand {
+    left: 60%;
+    top: 72%;
+    width: 12%;
+}
+
+.page-4 {
+    background: url('../img/background-g2.png');
+    background-size: cover;
+}
+
+    .page-4 .tishi-g2 {
+        left: 0;
+        top: 0;
+        width: 50%;
+    }
+
+    .page-4 .shizhong-g2 {
+        left: 46%;
+        top: 8%;
+        width: 25%;
+    }
+
+    .page-4 .using-time {
+        width: 50%;
+        top: 15%;
+        left: 70%;
+        text-align: left;
+        position: absolute;
+        font-weight: bold;
+        font-size: 25px;
+        color: #fff;
+        -webkit-text-stroke: #000 1px;
+        text-shadow: 2px 2px 2px #000;
+    }
+
+    .page-4 .juxing-g2 {
+        /*	background:url('../img/juxing-g2.png');
+        background-size:cover;*/
+        border: 5px solid white;
+        left: 5%;
+        top: 22%;
+        width: 88%;
+        height: 70%;
+    }
+
+        .page-4 .juxing-g2 .items {
+            position: relative;
+            float: left;
+            width: 22%;
+            height: 24%;
+            margin-left: 2%;
+        }
+
+            .page-4 .juxing-g2 .items.red2000 {
+                background: url('../img/red2000.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            .page-4 .juxing-g2 .items.greenz {
+                background: url('../img/greenz.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            .page-4 .juxing-g2 .items.green250 {
+                background: url('../img/green250.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            .page-4 .juxing-g2 .items.redz {
+                background: url('../img/redz.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            .page-4 .juxing-g2 .items.redg {
+                background: url('../img/redg.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            .page-4 .juxing-g2 .items.redp {
+                background: url('../img/redp.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+        .page-4 .juxing-g2 .unselected {
+            border: 1px solid transparent;
+        }
+
+        .page-4 .juxing-g2 .selected {
+            border: 1px solid green;
+        }
+
+    .page-4 .button-ok {
+        left: 24%;
+        top: 85%;
+        width: 52%;
+    }
+
+.game-2.page-101 .button-return {
+    left: 12%;
+    top: 72%;
+    width: 34%;
+}
+
+.game-2.page-101 .button-next {
+    left: 54%;
+    top: 72%;
+    width: 34%;
+}
+
+.game-2.page-101 .logo {
+    left: 1%;
+    top: 1%;
+    width: 25%;
+}
+
+    .game-2.page-101 .logo.right {
+        left: auto;
+        right: 1%;
+        top: 1%;
+        width: 25%;
+    }
+
+.game-2.page-101 .result {
+    left: 10%;
+    top: 14%;
+    width: 80%;
+}
+
+.game-2.page-101 .using-time {
+    position: absolute;
+    top: 1%;
+    font-weight: bold;
+    font-size: 60px;
+    color: #fff;
+    -webkit-text-stroke: #000 3px;
+    text-shadow: 5px 5px 5px #000;
+}
+
+    .game-2.page-101 .using-time.s {
+        left: 5%;
+    }
+
+    .game-2.page-101 .using-time.a {
+        left: 5%;
+    }
+
+    .game-2.page-101 .using-time.b {
+        left: 20%;
+    }
+
+    .game-2.page-101 .using-time.c {
+        left: 35%;
+    }
+
+    .game-2.page-101 .using-time.d {
+        left: 50%;
+    }
+
+    .game-2.page-101 .using-time.e {
+        left: 50%;
+    }
+
+.page.page-99 {
+    background-image: url('../img/rank.jpg');
+}
+
+    .page.page-99 .rank {
+        width: 90%;
+        height: 45%;
+        left: 5%;
+        top: 28%;
+    }
+
+        .page.page-99 .rank .rank-table {
+            border: 1px solid darkred;
+            width: 100%;
+            height: 100%;
+        }
+
+            .page.page-99 .rank .rank-table .rank-th-tr {
+                background-color: #c0504e;
+                color: white;
+            }
+
+            .page.page-99 .rank .rank-table .rank-td-tr {
+            }
+
+.odd-tr {
+    background-color: white;
+    color: black;
+}
+
+.even-tr {
+    background-color: #e5b9b8;
+    color: black;
+}
+
+.page.page-99 .rank .rank-table td {
+    border: 1px solid #bf524f;
+    height: 9%;
+}

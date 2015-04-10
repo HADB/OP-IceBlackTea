@@ -90,7 +90,19 @@
             <div>Loading</div>
         </div>
     </div>
-    <div class="page game-1 page-1 hide">
+    <!-- Index -->
+    <div class="page index page-1000 hide">
+        <img class="button-enter-game" src="img/button-enter-game.png" />
+        <img class="button-rank-list" src="img/button-rank-list.png" />
+    </div>
+    <!-- Rank List-->
+    <div class="page page-99 hide">
+        <div class="rank">
+            <table class="rank-table" cellspacing="0" cellpadding="2"></table>
+        </div>
+    </div>
+
+    <div class="page page-1 hide">
         <img class="logo ani-fadeIn" src="img/logo.png" />
         <img class="mission ani-moveLeftRightSpring ani-delay500" src="img/mission.png" />
         <img class="number-1 ani-moveDownUpSpring ani-delay800" src="img/number-1.png" />
@@ -102,7 +114,7 @@
         <img class="hand ani-fadeOut ani-duration1500 ani-iteration-infinite" src="img/hand.png" />
     </div>
 
-    <div class="page game-1 page-2 hide">
+    <div class="page page-2 hide">
         <img class="logo ani-fadeIn" src="img/logo.png" />
         <img class="title-1-2 ani-fadeIn" src="img/title-1-2.png" />
         <img class="ice-black-tea ani-rotateIn" src="img/ice-black-tea.png" />
@@ -112,13 +124,13 @@
         <span class="using-time">0.00s</span>
     </div>
 
-    <div class="page game-1 page-100 hide">
+    <div class="page page-100 hide">
         <img class="button-return" src="img/button-return.png" />
         <img class="button-next" src="img/button-next.png" />
         <img class="logo" src="img/logo.png" />
         <img class="result" />
         <span class="using-time">0.00s</span>
-		<button id="testrank" style="position:absolute;top:50%;left:50%;z-index:999">查看排名</button>
+        <button id="testrank" style="position:absolute;top:50%;left:50%;z-index:999">查看排名</button>
     </div>
     <!-- Game2 start-->
     <div class="page game-2 page-3 hide">
@@ -200,15 +212,6 @@
         <span class="using-time">0.00s</span>
     </div>
     <!-- Game2 end-->
-	<!-- Rank start-->
-	<div class="page page-99 hide">
-		<div class="rank">
-			<table class="rank-table" cellspacing="0" cellpadding="2" >
-				
-			</table>
-		</div>
-	</div>
-	<!-- Rank end-->
     <!--提前加载-->
     <div class="hide">
         <img src="img/score-s.png" />
@@ -222,17 +225,17 @@
     <script src="js/zepto.min.js"></script>
     <script src="js/touch.js"></script>
     <script src="js/ibt.js"></script>
-	<script>
-		$(function () {
-			$('.rank-td-tr').each(function(){
-				if(($(this).index())%2==0){
-					$(this).addClass("even-tr");
-				}
-				else{
-					$(this).addClass("odd-tr");
-				}
-			})	
-		})
-	</script>
+    <script>
+        $(function () {
+            $('.rank-td-tr').each(function () {
+                if (($(this).index()) % 2 == 0) {
+                    $(this).addClass("even-tr");
+                }
+                else {
+                    $(this).addClass("odd-tr");
+                }
+            })
+        })
+    </script>
 </body>
 </html>
