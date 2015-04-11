@@ -462,11 +462,11 @@
     }
 
     .game-2.page-102 .using-time.d {
-        left: 50%;
+        left: 45%;
     }
 
     .game-2.page-102 .using-time.e {
-        left: 50%;
+        left: 45%;
     }
 
 .page.page-1002 {
@@ -489,6 +489,7 @@
             .page.page-1002 .rank .rank-table .rank-th-tr {
                 background-color: #c0504e;
                 color: white;
+				height:9%;
             }
 
             .page.page-1002 .rank .rank-table .rank-td-tr {
