@@ -120,12 +120,7 @@ $(function () {
         });
         IBT.pageMove(IBT.effects.fade, 1002);
     });
-
-    $(".page-1001 .button-mission-1").singleTap(function () {
-        $('#clickaudio')[0].play();
-        IBT.pageMove(IBT.effects.fade, 1);
-    });
-
+	
     $(".page-1 .start").singleTap(function () {
         $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, 2);
