@@ -114,7 +114,7 @@ $(function () {
                     } else {
                         trColor = "odd-tr";
                     }
-                    trs += "<tr class='" + trColor + " rank-td-tr'><td align='center'>" + (i + 1) + "</td>" + "<td align='center'>" + formatPalyerName(item.userName == null ? item.userId : item.userName) + "</td>" + "<td align='center'>" + item.point + "</td><td align='center'>无</td><td align='center'>无</td><td align='center'>无</td><td align='center'>" + (((item.timeUsed) / 100.00).toFixed(2)) + "</td></tr>";
+                           trs += "<tr class='" + trColor + " rank-td-tr'><td align='center'>" + (i + 1) + "</td>" + "<td align='center'>" + formatPalyerName(item.userName == null ? item.userId : item.userName) + "</td>" + "<td align='center'>" + formatTime(item.timeUsed) + "</td><td align='center'>无</td><td align='center'>无</td><td align='center'>无</td><td align='center'>" +item.point +"</td></tr>";
 
                 });
                 $(".rank-table").append(trs);
@@ -230,32 +230,7 @@ $(function () {
         IBT.pageMove(IBT.effects.fade, IBT.resultNextPageNumber);
     });
 
-    $("#testrank").singleTap(function () {
-        IBT.pageMove(IBT.effects.fade, 1002);
-        $.get("/api/game/item/leaders", { "gameId": gameId, "start": 0, "size": 10 }, function (data, textStatus) {
-            var itemSize = 0;
-            if (data == null) {
-
-            }
-            else {
-                itemSize = data.length;
-                var trs = "<tr class='rank-th-tr'><th style='width: 10%;' align='center'>序号</th><th style='width: 18%;' align='center'>昵称</th><th style='width: 14%;' align='center'>成绩1</th><th style='width: 14%;' align='center'>成绩2</th><th style='width: 14%;' align='center'>成绩3</th><th style='width: 14%;' align='center'>成绩4</th><th style='width: 14%;' align='center'>总成绩</th></tr>";
-                $.each(data, function (i, item) {
-
-                    var trColor;
-                    if (i % 2 == 0) {
-                        trColor = "even-tr";
-                    } else {
-                        trColor = "odd-tr";
-                    }
-                    trs += "<tr class='" + trColor + " rank-td-tr'><td align='center'>" + (i + 1) + "</td>" + "<td align='center'>" + formatPalyerName(item.userName == null ? item.userId : item.userName) + "</td>" + "<td align='center'>" + item.point + "</td><td align='center'>无</td><td align='center'>无</td><td align='center'>无</td><td align='center'>" + item.point +"</td></tr>";
-
-                });
-                $(".rank-table").append(trs);
-
-            }
-        });
-    });
+    
 	$('.mission').each(function(){
 		$(this).singleTap(function(){
 			if($('.lock-'+$(this).attr("adata")).hasClass('lock-closed')){
@@ -509,6 +484,15 @@ function formatPalyerName(strName) {
         return strName;
     }
 }
+function formatTime(secs100){
+	var sec=0, ssec=0;//时间默认值		
+	if(secs100 > 0){					
+		sec = Math.floor(secs100 / 100);
+		ssec = Math.floor((secs100 - sec*100)/10);
+		}					
+	return sec+'\″'+ssec;	
+}
+		
 function submitScore() {
     setGamePoints();
     var submitData = {
