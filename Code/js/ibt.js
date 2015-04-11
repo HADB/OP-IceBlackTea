@@ -210,7 +210,7 @@ $(function () {
     $(".page-101 .button-next").singleTap(function () {
         $('#clickaudio')[0].play();
         if (IBT.resultNextPageNumber == 9999) {
-            alert("请在下周挑战该任务！");
+            alert("下一周挑战下一个游戏！");
 			$('.game1-time-span').text(IBT.game1TimeResult+" S");
 			$('.game1-level-span').text(IBT.game1LevelResult);
 			 IBT.pageMove(IBT.effects.fade, 1001);
@@ -257,6 +257,29 @@ $(function () {
             }
         });
     });
+	$('.mission').each(function(){
+		$(this).singleTap(function(){
+			if($('.lock-'+$(this).attr("adata")).hasClass('lock-closed')){
+				alert("下一周挑战该游戏！");
+			}
+			else{
+				$('#clickaudio')[0].play();
+				IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
+			}
+			
+		})
+	})
+	
+	$('.lock').each(function(){
+		$(this).click(function(){
+			if($(this).hasClass('lock-closed')){
+				alert("下一周挑战该游戏！");
+			}
+			else{
+				return false;
+			}
+		})
+	})
 });
 
 //游戏1计时器
