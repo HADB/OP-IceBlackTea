@@ -5,13 +5,13 @@
     .page-1000 .button-enter-game {
         top: 63%;
         left: 5%;
-        width: 50%;
+        width: 48%;
     }
 
     .page-1000 .button-rank-list {
         top: 80%;
         left: 20%;
-        width: 50%;
+        width: 48%;
     }
 
 .page-1001 {
@@ -505,7 +505,7 @@
 }
 
 .page.page-1002 .rank .rank-table td {
-    border: 1px solid #bf524f;
+    border: dotted 1px #bf524f;
     height: 9%;
 }
 .game1-level-span{

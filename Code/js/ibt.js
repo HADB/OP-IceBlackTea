@@ -1,5 +1,5 @@
 ﻿var userId;
-var gameId;
+var gameId = "fourgame_dian_0409";
 var m = [{ "name": "red2000", "num": 3 }, { "name": "redz", "num": 2 }, { "name": "redg", "num": 2 }, { "name": "green250", "num": 2 }];
 var mselected = [{ "name": "red2000", "selectednum": 0 }, { "name": "redz", "selectednum": 0 }, { "name": "redg", "selectednum": 0 }, { "name": "green250", "selectednum": 0 }];
 var mnums = 0;
@@ -98,9 +98,10 @@ $(function () {
         $.get("/api/game/item/leaders", { "gameId": gameId, "start": 0, "size": 10 }, function (data, textStatus) {
             var itemSize = 0;
             if (data == null) {
-
+				alert("没有排行数据！");
             }
             else {
+			console.log(data);
                 itemSize = data.length;
                 var trs = "<tr class='rank-th-tr'><th style='width: 10%;' align='center'>序号</th><th style='width: 18%;' align='center'>昵称</th><th style='width: 14%;' align='center'>成绩1</th><th style='width: 14%;' align='center'>成绩2</th><th style='width: 14%;' align='center'>成绩3</th><th style='width: 14%;' align='center'>成绩4</th><th style='width: 14%;' align='center'>总成绩</th></tr>";
                 $.each(data, function (i, item) {
@@ -458,7 +459,7 @@ function getUrlParam(name) {
 
 function checkGameAndUser() {
     userId = getUrlParam("userId");
-    gameId = "fourgame_dian_0409";
+   
     if (userId == null) {
         alert("无法确认用户身份，请从微信中访问我们.");
     }
