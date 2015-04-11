@@ -30,6 +30,8 @@ var IBT = {
     directions: { up: 1, down: -1 },
 
     isAnimating: false,
+	
+	game1Played: 0,
 
     game1ClickCount: 0,
 
@@ -82,7 +84,7 @@ var IBT = {
     },
 
     loadComplete: function () {
-        //checkGameAndUser();
+		checkUser();
         IBT.pageMove(IBT.effects.fade, 1000);
     }
 };
@@ -177,6 +179,7 @@ $(function () {
 				IBT.game1LevelResult="E";
             }
             submitScore();//提交分数;
+			IBT.game1Played=1;
 			IBT.game1TimeResult=IBT.game1ClickUsingTime.toFixed(2);
             showResult(IBT.game1result, 101, IBT.game1ClickUsingTime.toFixed(2), 1, 9999)//提示下周挑战游戏2
         }
@@ -260,7 +263,16 @@ $(function () {
 			}
 			else{
 				$('#clickaudio')[0].play();
-				IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
+				setTimeout(function(){
+				checkGameAndUser();
+				}
+				,200);
+				if(IBT.game1Played==0){//TODO:还有其他游戏
+					IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
+				}
+				else{
+					alert("你已经参加过了疯狂点点点。");
+				}
 			}
 			
 		})
@@ -458,34 +470,36 @@ function getUrlParam(name) {
 }
 
 function checkGameAndUser() {
-    userId = getUrlParam("userId");
-   
-    if (userId == null) {
-        alert("无法确认用户身份，请从微信中访问我们.");
-    }
-    else {
-        checkGame();
-        checkUser();
-    }
+    checkGame();
+    checkUser();
 }
 
 function checkGame() {
-    $.get("http://121.41.105.146/api/game/id", { id: gameId }, function (data, textStatus) {
 
-        if (data == null) {
-            alert("游戏不存在");
-        }
-    });
+    $.get("http://121.41.105.146/api/game/id", { id: gameId }, function (data, textStatus) {
+			if (data == null) {
+				alert("游戏不存在");
+				window.location.href="www.xxx.com";
+			}
+		});
+	
 }
 
 function checkUser() {
+	userId = getUrlParam("userId");
+    if (userId == null) {
+        alert("无法确认用户身份，请从微信中访问我们.");
+		window.location.href="www.xxx.com";
+    }
+	else{
     $.get("http://121.41.105.146/api/game/item", { userId: userId, game: gameId }, function (data, textStatus) {
 
         if (data != null) {
-            alert("你已经参加过了疯狂点点点。");
-            window.location = "./fourgame_dian_leaderboard.htm?userId=" + userId
-        }
-    });
+			IBT.game1Played=1;
+				//alert("你已经参加过了疯狂点点点。");
+			}
+		})
+	}
 
 }
 function formatPalyerName(strName) {
