@@ -248,7 +248,7 @@ $(function () {
                     } else {
                         trColor = "odd-tr";
                     }
-                    trs += "<tr class='" + trColor + " rank-td-tr'><td align='center'>" + (i + 1) + "</td>" + "<td align='center'>" + formatPalyerName(item.userName == null ? item.userId : item.userName) + "</td>" + "<td align='center'>" + item.point + "</td><td align='center'>无</td><td align='center'>无</td><td align='center'>无</td><td align='center'>" + (((item.timeUsed) / 100.00).toFixed(2)) + "</td></tr>";
+                    trs += "<tr class='" + trColor + " rank-td-tr'><td align='center'>" + (i + 1) + "</td>" + "<td align='center'>" + formatPalyerName(item.userName == null ? item.userId : item.userName) + "</td>" + "<td align='center'>" + item.point + "</td><td align='center'>无</td><td align='center'>无</td><td align='center'>无</td><td align='center'>" + item.point +"</td></tr>";
 
                 });
                 $(".rank-table").append(trs);
