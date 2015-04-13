@@ -526,3 +526,11 @@
 	text-align: center;
 	color: white;
 }
+.score-expl{
+	top: 25%;
+	position: absolute;
+	left: 5%;
+	color: white;
+
+}
+}

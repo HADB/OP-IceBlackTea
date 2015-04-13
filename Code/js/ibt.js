@@ -233,11 +233,11 @@ $(function () {
     
 	$('.mission').each(function(){
 		$(this).singleTap(function(){
+			$('#clickaudio')[0].play();
 			if($('.lock-'+$(this).attr("adata")).hasClass('lock-closed')){
 				alert("下一周挑战该游戏！");
 			}
 			else{
-				$('#clickaudio')[0].play();
 				setTimeout(function(){
 				checkGameAndUser();
 				}
@@ -255,11 +255,21 @@ $(function () {
 	
 	$('.lock').each(function(){
 		$(this).click(function(){
+		$('#clickaudio')[0].play();
 			if($(this).hasClass('lock-closed')){
 				alert("下一周挑战该游戏！");
 			}
 			else{
-				return false;
+				setTimeout(function(){
+				checkGameAndUser();
+				}
+				,200);
+				if(IBT.game1Played==0){//TODO:还有其他游戏
+					IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
+				}
+				else{
+					alert("你已经参加过了疯狂点点点。");
+				}
 			}
 		})
 	})
@@ -436,6 +446,9 @@ function game2Reset() {
 }
 function setGamePoints() {
     IBT.perGamePoint.game1 = 25.00 - (25.00 / (11.00)).toFixed(2) * IBT.game1ClickUsingTime.toFixed(2);
+	if(IBT.perGamePoint.game1<0){
+		IBT.perGamePoint.game1=0;
+	}
     IBT.gamePoint = IBT.perGamePoint.game1;//TODO:+game2...
 }
 function getUrlParam(name) {
@@ -488,7 +501,7 @@ function formatTime(secs100){
 	var sec=0, ssec=0;//时间默认值		
 	if(secs100 > 0){					
 		sec = Math.floor(secs100 / 100);
-		ssec = Math.floor((secs100 - sec*100)/10);
+		ssec =secs100 - sec*100;
 		}					
 	return sec+'\″'+ssec;	
 }
