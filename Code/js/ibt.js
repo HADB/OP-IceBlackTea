@@ -178,8 +178,10 @@ $(function () {
                 IBT.game1result = IBT.results.E;
 				IBT.game1LevelResult="E";
             }
+			if(IBT.game1Played==0){
             submitScore();//提交分数;
 			IBT.game1Played=1;
+			}
 			IBT.game1TimeResult=IBT.game1ClickUsingTime.toFixed(2);
             showResult(IBT.game1result, 101, IBT.game1ClickUsingTime.toFixed(2), 1, 9999)//提示下周挑战游戏2
         }
@@ -247,6 +249,7 @@ $(function () {
 				}
 				else{
 					alert("你已经参加过了疯狂点点点。");
+					IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
 				}
 			}
 			
@@ -483,7 +486,12 @@ function checkUser() {
     $.get("/api/game/item", { userId: userId, game: gameId }, function (data, textStatus) {
 
         if (data != null) {
+		
 			IBT.game1Played=1;
+			IBT.game1ClickUsingTime=(data.timeUsed/100).toFixed(2);
+			getGame1LevelByTime();
+			$('.game1-time-span').text(IBT.game1ClickUsingTime+" S");
+			$('.game1-level-span').text(IBT.game1LevelResult);
 				//alert("你已经参加过了疯狂点点点。");
 			}
 		})
@@ -505,7 +513,32 @@ function formatTime(secs100){
 		}					
 	return sec+'\″'+ssec;	
 }
-		
+function getGame1LevelByTime(){
+	  if (IBT.game1ClickUsingTime < 6.1) {
+                IBT.game1result = IBT.results.S;
+				IBT.game1LevelResult="S";
+            }
+            else if (IBT.game1ClickUsingTime < 7.1) {
+                IBT.game1result = IBT.results.A;
+				IBT.game1LevelResult="A";
+            }
+            else if (IBT.game1ClickUsingTime < 8.1) {
+                IBT.game1result = IBT.results.B;
+				IBT.game1LevelResult="B";
+            }
+            else if (IBT.game1ClickUsingTime < 9.1) {
+                IBT.game1result = IBT.results.C;
+				IBT.game1LevelResult="C";
+            }
+            else if (IBT.game1ClickUsingTime < 10.1) {
+                IBT.game1result = IBT.results.D;
+				IBT.game1LevelResult="D";
+            }
+            else {
+                IBT.game1result = IBT.results.E;
+				IBT.game1LevelResult="E";
+            }
+}		
 function submitScore() {
     setGamePoints();
     var submitData = {
