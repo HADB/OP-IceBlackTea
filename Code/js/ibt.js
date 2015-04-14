@@ -464,7 +464,7 @@ function checkGameAndUser() {
 
 function checkGame() {
 
-    $.get("http://121.41.105.146/api/game/id", { id: gameId }, function (data, textStatus) {
+    $.get("/api/game/id", { id: gameId }, function (data, textStatus) {
 			if (data == null) {
 				alert("游戏不存在");
 				window.location.href="www.xxx.com";
@@ -480,7 +480,7 @@ function checkUser() {
 		window.location.href="www.xxx.com";
     }
 	else{
-    $.get("http://121.41.105.146/api/game/item", { userId: userId, game: gameId }, function (data, textStatus) {
+    $.get("/api/game/item", { userId: userId, game: gameId }, function (data, textStatus) {
 
         if (data != null) {
 			IBT.game1Played=1;
@@ -532,4 +532,3 @@ function submitScore() {
         }
     });
 }
-
