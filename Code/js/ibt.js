@@ -248,7 +248,7 @@ $(function () {
 					IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
 				}
 				else{
-					alert("你已经参加过了疯狂点点点。");
+					alert("只有第一次过关的成绩有效。");
 					IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
 				}
 			}
@@ -271,7 +271,8 @@ $(function () {
 					IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
 				}
 				else{
-					alert("你已经参加过了疯狂点点点。");
+					alert("只有第一次过关的成绩有效。");
+					IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
 				}
 			}
 		})
