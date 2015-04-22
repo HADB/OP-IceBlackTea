@@ -12,10 +12,61 @@ var ssuccess = 0;
 var sfail = 0;
 var divs = new Array();//所有图片的div集合
 var rands = new Array();//16个不相同的0-15随机数组成的数组
+
+var lockers={
+	lock1_click:false,
+	lock2_click:false,
+	lock3_click:false,
+	lock4_click:false,
+	text1_click:false,
+	text2_click:false,
+	text3_click:false,
+	text4_click:false
+}
 for (var i = 0; i < m.length; i++) {
     mnums = mnums + m[i].num;
     mm[m[i].name] = 1;//需要选择的图片
 }
+var GAME = {
+
+    game1: { name: 'fourgame_dian_0409', open: false, etime:11.00},
+
+    game2: { name: 'fourgame_find_0420', open: false, etime:18.00 },
+
+    game3: { name: 'fourgame_lian_0427', open: false },
+
+    game4: { name: 'fourgame_shen_0503', open: false },
+
+    current:-1
+    
+}
+var defaultPoints = {
+    fourgame_dian_0409_t: 0,
+    fourgame_find_0420_t: 0,
+    fourgame_lian_0427_t: 0,
+    fourgame_shen_0503_t: 0,
+    fourgame_dian_0409_l: -1,
+    fourgame_find_0420_l: -1,
+    fourgame_lian_0427_l: -1,
+    fourgame_shen_0503_l: -1
+}
+
+var gamePlayed={
+    fourgame_dian_0409: false,
+    fourgame_find_0420: false,
+    fourgame_lian_0427: false,
+    fourgame_shen_0503: false
+}
+
+
+var gameOpen={
+    fourgame_dian_0409: null,
+    fourgame_find_0420: null,
+    fourgame_lian_0427: null,
+    fourgame_shen_0503: null
+}
+
+
 var IBT = {
     gamePoint: 0,
 
@@ -47,7 +98,11 @@ var IBT = {
 	
 	game1TimeResult: 0,//上面的usingtime置零了
 
-    game2result: null,
+	game2result: null,
+
+	game2LevelResult: null,
+
+    game2TimeResult: 0,
 
     resultReturnPageNumber: 1,
 
@@ -84,7 +139,24 @@ var IBT = {
     },
 
     loadComplete: function () {
-		checkUser();
+        if (getUrlParam("userId") == null || getUrlParam("userId") == "") {
+            if (window.localStorage.getItem("bhcid")!=null) {
+                userId = window.localStorage.getItem("bhcid");
+            }
+            else {
+                alert("测试代码：请关注公众号...");
+                window.location.href = "www.xxx.com";
+            }
+        }
+        else {
+            window.localStorage.setItem("bhcid", getUrlParam("userId"));
+            window.location.href = "index.html";
+        }
+        
+        checkGameOpenOrClose();//TODO:
+        setDefaultScores();
+        //setLockByGameStatus();
+	checkUser();
         IBT.pageMove(IBT.effects.fade, 1000);
     }
 };
@@ -97,24 +169,20 @@ $(function () {
 
     $(".page-1000 .button-rank-list").singleTap(function () {
         $('#clickaudio')[0].play();
-        $.get("/api/game/item/leaders", { "gameId": gameId, "start": 0, "size": 10 }, function (data, textStatus) {
-            var itemSize = 0;
-            if (data == null) {
+        $.get("/index.php?r=game/getrank", function (data, textStatus) {
+            if (data.success == false) {
 				alert("没有排行数据！");
             }
             else {
-			console.log(data);
-                itemSize = data.length;
                 var trs = "<tr class='rank-th-tr'><th style='width: 10%;' align='center'>序号</th><th style='width: 18%;' align='center'>昵称</th><th style='width: 14%;' align='center'>成绩1</th><th style='width: 14%;' align='center'>成绩2</th><th style='width: 14%;' align='center'>成绩3</th><th style='width: 14%;' align='center'>成绩4</th><th style='width: 14%;' align='center'>总成绩</th></tr>";
-                $.each(data, function (i, item) {
-
+                $.each(data.data, function (i, item) {
                     var trColor;
                     if (i % 2 == 0) {
                         trColor = "even-tr";
                     } else {
                         trColor = "odd-tr";
                     }
-                           trs += "<tr class='" + trColor + " rank-td-tr'><td align='center'>" + (i + 1) + "</td>" + "<td align='center'>" + formatPalyerName(item.userName == null ? item.userId : item.userName) + "</td>" + "<td align='center'>" + formatTime(item.timeUsed) + "</td><td align='center'>无</td><td align='center'>无</td><td align='center'>无</td><td align='center'>" +item.point +"</td></tr>";
+                    trs += "<tr class='" + trColor + " rank-td-tr'><td align='center'>" + (i + 1) + "</td>" + "<td align='center'>" + formatPalyerName(item.userName == null ? item.userId : item.userName) + "</td>" + "<td align='center'>" + formatTime(item.fourgame_dian_0409_t) + "</td><td align='center'>" + formatTime(item.fourgame_find_0420_t) + "</td><td align='center'>" + formatTime(item.fourgame_lian_0427_t) + "</td><td align='center'>" + formatTime(item.fourgame_shen_0503_t) + "</td><td align='center'>" + item.sum_point + "</td></tr>";
 
                 });
                 $(".rank-table").append(trs);
@@ -131,6 +199,7 @@ $(function () {
 
 
     $(".page-2 .button-left,.page-2 .button-right").on('touchstart pointerdown', function () {
+	//alert(IBT.game1ClickCount);
         $('#clickaudio')[0].play();
         if (IBT.game1ClickCount == 0) {
             IBT.game1end = false;
@@ -178,12 +247,22 @@ $(function () {
                 IBT.game1result = IBT.results.E;
 				IBT.game1LevelResult="E";
             }
-			if(IBT.game1Played==0){
-            submitScore();//提交分数;
-			IBT.game1Played=1;
+            IBT.game1TimeResult = IBT.game1ClickUsingTime.toFixed(2);
+            if (gamePlayed[GAME.game1.name] == false) {
+                submitScore();
+            }
+            else {
+                submitScoreAgain();
+            }
+			//if(IBT.game1Played==0){
+			//IBT.game1Played=1;
+			//}
+			if (GAME.game2.open == true) {//游戏2开启了
+			    showResult(IBT.game1result, 101, IBT.game1TimeResult, 1, 3)//进入游戏2
 			}
-			IBT.game1TimeResult=IBT.game1ClickUsingTime.toFixed(2);
-            showResult(IBT.game1result, 101, IBT.game1ClickUsingTime.toFixed(2), 1, 9999)//提示下周挑战游戏2
+			else {
+			    showResult(IBT.game1result, 101, IBT.game1TimeResult, 1, 9999)//提示下周挑战游戏2
+			}
         }
         else {
             IBT.game1result = IBT.results.Failed;
@@ -197,7 +276,11 @@ $(function () {
     $(".page-3 .start").singleTap(function () {
         $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, 4);
-        timerGo();
+        setTimeout(function () {
+            game2Reset();
+            game2Init();
+        timerGo();},600);
+
     });
 
     $(".page-101 .button-return").singleTap(function () {
@@ -212,68 +295,96 @@ $(function () {
         $('#clickaudio')[0].play();
         if (IBT.resultNextPageNumber == 9999) {
             alert("下一周挑战下一个游戏！");
-			$('.game1-time-span').text(IBT.game1TimeResult+" S");
-			$('.game1-level-span').text(IBT.game1LevelResult);
+
+           
+			GAME.current = -1;
 			 IBT.pageMove(IBT.effects.fade, 1001);
         }
         else {
+            GAME.current = 2;
             IBT.pageMove(IBT.effects.fade, IBT.resultNextPageNumber);
         }
     });
 
     $(".page-102 .button-return").singleTap(function () {
         $('#clickaudio')[0].play();
-        game2Reset();
-        IBT.pageMove(IBT.effects.fade, IBT.resultReturnPageNumber);
+       // game2Reset();
+        IBT.pageMove(IBT.effects.fade, 1001);
     });
 
     $(".page-102 .button-next").singleTap(function () {
         $('#clickaudio')[0].play();
-        IBT.pageMove(IBT.effects.fade, IBT.resultNextPageNumber);
+        if (IBT.resultNextPageNumber == 9999) {
+            alert("下一周挑战下一个游戏！");
+
+
+            GAME.current = -1;
+            IBT.pageMove(IBT.effects.fade, 1001);
+        }
+       
     });
 
     
 	$('.mission').each(function(){
 		$(this).singleTap(function(){
-			$('#clickaudio')[0].play();
+		if(lockers["lock"+$(this).attr("adata")+"_click"]==true){
+			return false;
+		}
+		else{
+			lockers["text"+$(this).attr("adata")+"_click"]=true;	
+		$('#clickaudio')[0].play();
 			if($('.lock-'+$(this).attr("adata")).hasClass('lock-closed')){
 				alert("下一周挑战该游戏！");
 			}
 			else{
 				setTimeout(function(){
-				checkGameAndUser();
+							
+
+				//checkGameAndUser();
 				}
 				,200);
-				if(IBT.game1Played==0){//TODO:还有其他游戏
-					IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
-				}
-				else{
-					alert("只有第一次过关的成绩有效。");
-					IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
-				}
+				//if(IBT.game1Played==0){//TODO:还有其他游戏
+					lockers["text"+$(this).attr("adata")+"_click"]=false;
+				IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
+				
+				GAME.current = $(this).attr('adata');
+				//}
+				//else{
+				//	alert("只有第一次过关的成绩有效。");
+				//	IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
+				//}
 			}
-			
+			}
 		})
 	})
 	
 	$('.lock').each(function(){
-		$(this).click(function(){
+		$(this).singleTap(function(){
+		if(lockers["text"+$(this).attr("adata")+"_click"]==true){
+			return false;
+		}
+		else{
+		lockers["lock"+$(this).attr("adata")+"_click"]=true;
 		$('#clickaudio')[0].play();
 			if($(this).hasClass('lock-closed')){
 				alert("下一周挑战该游戏！");
 			}
 			else{
 				setTimeout(function(){
-				checkGameAndUser();
+				//checkGameAndUser();
+				
 				}
 				,200);
-				if(IBT.game1Played==0){//TODO:还有其他游戏
-					IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
-				}
-				else{
-					alert("只有第一次过关的成绩有效。");
-					IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
-				}
+				//if(IBT.game1Played==0){//TODO:还有其他游戏
+lockers["lock"+$(this).attr("adata")+"_click"]=false;
+				IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
+				GAME.current = $(this).attr('adata');
+				//}
+				//else{
+				//	alert("只有第一次过关的成绩有效。");
+				//	IBT.pageMove(IBT.effects.fade, $(this).attr('pdata'));
+				//}
+			}
 			}
 		})
 	})
@@ -282,10 +393,12 @@ $(function () {
 //游戏1计时器
 function startGame1Timer() {
     setTimeout(function () {
+	//alert(IBT.game1end);
         if (!IBT.game1end) {
             IBT.game1ClickUsingTime += 0.01;
             $(".page-2 .using-time").html(IBT.game1ClickUsingTime.toFixed(2) + "s");
-            startGame1Timer();
+      //      alert(IBT.game1ClickUsingTime.toFixed(2) );
+			startGame1Timer();
         }
         else {
             IBT.game1ClickUsingTime = 0;
@@ -416,28 +529,43 @@ function setRandomDivs() {
 function game2Success() {
     if (IBT.game2ClickUsingTime < 9) {
         IBT.game2result = IBT.results.S;
+        IBT.game2LevelResult = "S";
+       
     }
     else if (IBT.game2ClickUsingTime < 11) {
         IBT.game2result = IBT.results.A;
+        IBT.game2LevelResult = "A";
     }
     else if (IBT.game2ClickUsingTime < 13) {
         IBT.game2result = IBT.results.B;
+        IBT.game2LevelResult = "B";
     }
     else if (IBT.game2ClickUsingTime < 15) {
         IBT.game2result = IBT.results.C;
+        IBT.game2LevelResult = "C";
     }
     else if (IBT.game2ClickUsingTime < 17) {
         IBT.game2result = IBT.results.D;
+        IBT.game2LevelResult = "D";
     }
     else {
         IBT.game2result = IBT.results.E;
+        IBT.game2LevelResult = "E";
     }
-    showResultGame(IBT.game2result, 102, IBT.game2ClickUsingTime.toFixed(2), 3, 5)
+    IBT.game2TimeResult = IBT.game2ClickUsingTime.toFixed(2);
+    if (gamePlayed[GAME.game2.name] == false) {
+        submitScore();
+    }
+    else {
+        submitScoreAgain();
+    }
+    showResult(IBT.game2result, 102, IBT.game2ClickUsingTime.toFixed(2), 1001, 9999)
 }
 function game2Fail() {
     alert("你失败了，请重新挑战！");
+	IBT.pageMove(IBT.effects.fade, 3);
     game2Reset();//延时
-    IBT.pageMove(IBT.effects.fade, 3);
+    
 }
 function game2Reset() {
     IBT.game2ClickUsingTime = 0.0;
@@ -445,15 +573,16 @@ function game2Reset() {
     ssuccess = 0;
     sfail = 0;
     selectednums = 0;
-    random16();
-    setRandomDivs();
-}
-function setGamePoints() {
-    IBT.perGamePoint.game1 = 25.00 - (25.00 / (11.00)).toFixed(2) * IBT.game1ClickUsingTime.toFixed(2);
-	if(IBT.perGamePoint.game1<0){
-		IBT.perGamePoint.game1=0;
+    //random16();
+    //setRandomDivs();
+	
 	}
-    IBT.gamePoint = IBT.perGamePoint.game1;//TODO:+game2...
+function setGamePoints() {
+    IBT.perGamePoint["game" + GAME.current] = 25.00 - (25.00 / (GAME["game" + GAME.current].etime)).toFixed(2) * IBT["game" + GAME.current + "TimeResult"];
+    if (IBT.perGamePoint["game" + GAME.current] < 0) {
+        IBT.perGamePoint["game" + GAME.current] = 0;
+	}
+   // IBT.gamePoint = IBT.perGamePoint["game" + GAME.current];//TODO:+game2...
 }
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -478,25 +607,13 @@ function checkGame() {
 }
 
 function checkUser() {
-	userId = getUrlParam("userId");
+	//userId = getUrlParam("userId");
+    userId = window.localStorage.getItem("bhcid");
     if (userId == null) {
         alert("无法确认用户身份，请从微信中访问我们.");
 		window.location.href="www.xxx.com";
     }
-	else{
-    $.get("/api/game/item", { userId: userId, game: gameId }, function (data, textStatus) {
 
-        if (data != null) {
-		
-			IBT.game1Played=1;
-			IBT.game1ClickUsingTime=(data.timeUsed/100).toFixed(2);
-			getGame1LevelByTime();
-			$('.game1-time-span').text(IBT.game1ClickUsingTime+" S");
-			$('.game1-level-span').text(IBT.game1LevelResult);
-				//alert("你已经参加过了疯狂点点点。");
-			}
-		})
-	}
 
 }
 function formatPalyerName(strName) {
@@ -514,6 +631,56 @@ function formatTime(secs100){
 		}					
 	return sec+'\″'+ssec;	
 }
+function getGameLevel(time,gameId){
+    var mresult="";
+    switch(gameId){
+        case GAME.game1.name:
+            if (time < 6.1) {
+                mresult = "S";
+       
+            }
+            else if (time < 7.1) {
+                mresult = "A";
+            }
+            else if (time < 8.1) {
+                mresult = "B";
+            }
+            else if (time < 9.1) {
+                mresult = "C";
+            }
+            else if (time< 10.1) {
+                mresult = "D";
+            }
+            else {
+                mresult = "E";
+            }
+            break;
+        case GAME.game2.name:
+            if (time < 9) {
+                mresult = "S";
+       
+            }
+            else if (time < 11) {
+                mresult = "A";
+            }
+            else if (time < 13) {
+                mresult = "B";
+            }
+            else if (time < 15) {
+                mresult = "C";
+            }
+            else if (time< 17) {
+                mresult = "D";
+            }
+            else {
+                mresult = "E";
+            }
+            break;
+    }
+   
+    return mresult;
+}
+
 function getGame1LevelByTime(){
 	  if (IBT.game1ClickUsingTime < 6.1) {
                 IBT.game1result = IBT.results.S;
@@ -539,17 +706,37 @@ function getGame1LevelByTime(){
                 IBT.game1result = IBT.results.E;
 				IBT.game1LevelResult="E";
             }
-}		
+}
+function submitScoreAgain() {
+    setGamePoints();
+
+    // alert(JSON.stringify(submitData));
+    $.get("/index.php?r=game/playagain", {
+        "gameId": GAME["game" + GAME.current].name,
+        "userId": userId,
+        "point": IBT.perGamePoint["game" + GAME.current],
+        "timeUsed": IBT["game" + GAME.current + "TimeResult"] * 100,
+        "playTime": new Date().getTime()
+    }, function (data, textStatus) {
+        if (data.success = true) {
+            setDefaultScores();
+        }
+        else {
+            alert("数据新增失败！");
+        }
+    })
+}
 function submitScore() {
     setGamePoints();
     var submitData = {
-        "gameId": gameId,
+        "gameId": GAME["game"+GAME.current].name,
         "userId": userId,
-        "point": IBT.perGamePoint.game1,
-        "timeUsed": IBT.game1ClickUsingTime.toFixed(2) * 100,
+        "point": IBT.perGamePoint["game" + GAME.current],
+        "timeUsed": IBT["game"+GAME.current+"TimeResult"] * 100,
         "playTime": new Date().getTime(),
 
     };
+	//alert(JSON.stringify(submitData));
     $.ajax({
         type: "post",
         url: "/api/game/play",
@@ -558,6 +745,8 @@ function submitScore() {
         data: JSON.stringify(submitData),
         contentType: "application/json; charset=utf-8",
         success: function (data) {
+            gamePlayed[GAME["game" + GAME.current].name] = true;
+            setDefaultScores();
            // alert("保存成功");
             // window.location = "排行榜地址TODO";
         }, // 注意不要在此行增加逗号  
@@ -565,4 +754,59 @@ function submitScore() {
             alert($.parseJSON(e.responseText));
         }
     });
+}
+
+function checkGameOpenOrClose() {
+    $.get("/index.php?r=game/getgamesoption", function (data, textStatus) {
+        if (data.success == true) {
+            for (var i = 0; i < data.data.length; i++) {
+                gameOpen[data.data[i].id] = data.data[i].status;
+               // alert(data.data[i].status);
+            }
+            
+            GAME.game1.open = gameOpen[GAME.game1.name]==1?true:false;
+            GAME.game2.open = gameOpen[GAME.game2.name] == 1 ? true : false;
+            GAME.game3.open = gameOpen[GAME.game3.name] == 1 ? true : false;
+            GAME.game4.open = gameOpen[GAME.game4.name] == 1 ? true : false;
+            setLockByGameStatus();
+        }
+        else{
+            alert("数据获取失败！");
+        }
+    })
+   
+}
+function setLockByGameStatus() {
+    for (i = 1; i < 5; i++) {
+        if (GAME["game" + i].open == true) {
+            $('.lock-' + i).addClass('lock-open');
+            $('.lock-' + i).attr("src", "img/lock-open.png");
+        }
+        else {
+            $('.lock-' + i).addClass('lock-closed');
+            $('.lock-' + i).attr("src", "img/lock-closed.png");
+        }
+    }
+}
+function setDefaultScores(){
+    $.get("/index.php?r=game/getmygamespoint", {  "userId": userId }, function (data, textStatus) {
+        if (data.success == true) {
+            for (var i = 0; i < data.data.length; i++) {
+                defaultPoints[ data.data[i].game_id+"_t"]=(data.data[i].time_used/100).toFixed(2);
+                defaultPoints[ data.data[i].game_id+"_l"]=getGameLevel(data.data[i].time_used/100,data.data[i].game_id);
+                gamePlayed[ data.data[i].game_id]=true;
+            }
+            $('.game1-time-span').text(defaultPoints[GAME.game1.name+ "_t"]!=0? (defaultPoints[GAME.game1.name+ "_t"] + " S"):"");
+            $('.game1-level-span').text(defaultPoints[GAME.game1.name + "_l"]!=-1?defaultPoints[GAME.game1.name + "_l"]:"");
+            $('.game2-time-span').text(defaultPoints[GAME.game2.name + "_t"] != 0 ? (defaultPoints[GAME.game2.name + "_t"] + " S") : "");
+            $('.game2-level-span').text(defaultPoints[GAME.game2.name + "_l"] != -1 ? defaultPoints[GAME.game2.name + "_l"] : "");
+            $('.game3-time-span').text(defaultPoints[GAME.game3.name+ "_t"]!=0? (defaultPoints[GAME.game3.name+ "_t"] + " S"):"");
+            $('.game3-level-span').text(defaultPoints[GAME.game3.name + "_l"]!=-1?defaultPoints[GAME.game3.name + "_l"]:"");
+            $('.game4-time-span').text(defaultPoints[GAME.game4.name + "_t"] != 0 ? (defaultPoints[GAME.game4.name + "_t"] + " S") : "");
+            $('.game4-level-span').text(defaultPoints[GAME.game4.name + "_l"] != -1 ? defaultPoints[GAME.game4.name + "_l"] : "");
+        }
+        else {
+            alert("数据获取失败！");
+        }
+    })
 }
