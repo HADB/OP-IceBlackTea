@@ -489,7 +489,7 @@
             .page.page-1002 .rank .rank-table .rank-th-tr {
                 background-color: #c0504e;
                 color: white;
-				height:9%;
+                height: 9%;
             }
 
             .page.page-1002 .rank .rank-table .rank-td-tr {
@@ -509,28 +509,52 @@
     border: dotted 1px #bf524f;
     height: 9%;
 }
-.game1-level-span{
-	position: absolute;
-	top: 33%;
-	left: 59%;
-	width: 18%;
-	font-size: large;
-	text-align: center;
-	color: white;
-}
-.game1-time-span{
-	position:absolute;
-	top: 33%;
-	left: 77%;
-	font-size: large;
-	text-align: center;
-	color: white;
-}
-.score-expl{
-	top: 25%;
-	position: absolute;
-	left: 5%;
-	color: white;
 
+.game1-level-span {
+    position: absolute;
+    top: 33%;
+    left: 59%;
+    width: 18%;
+    font-size: large;
+    text-align: center;
+    color: white;
 }
+
+.game1-time-span {
+    position: absolute;
+    top: 33%;
+    left: 77%;
+    font-size: large;
+    text-align: center;
+    color: white;
 }
+
+.score-expl {
+    top: 25%;
+    position: absolute;
+    left: 5%;
+    color: white;
+}
+
+
+/*游戏三*/
+.page-5 {
+    background-image: url('../img/game-3/game-3-rule-bg.jpg');
+}
+
+    .page-5 .start {
+        left: 16%;
+        top: 64%;
+        width: 68%;
+    }
+
+.page-6 {
+    background-image: url('../img/game-3/game-3-bg.jpg');
+}
+
+    .page-6 .blocks {
+        top: 25%;
+        width: 350px;
+        height: 350px;
+        border: 2px #fff solid;
+    }
