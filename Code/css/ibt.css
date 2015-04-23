@@ -178,42 +178,42 @@
         text-shadow: 5px 5px 5px #000;
     }
 
-.page-101 {
+.page-101, .page-103 {
     background-image: url('../img/background.jpg');
 }
 
-    .page-101 .button-return {
+    .page-101 .button-return, .page-103 .button-return {
         left: 12%;
         top: 72%;
         width: 34%;
     }
 
-    .page-101 .button-next {
+    .page-101 .button-next, .page-103 .button-next {
         left: 54%;
         top: 72%;
         width: 34%;
     }
 
-    .page-101 .logo {
+    .page-101 .logo, .page-103 .logo {
         left: 1%;
         top: 1%;
         width: 25%;
     }
 
-        .page-101 .logo.right {
+        .page-101 .logo.right, .page-103 .logo.right {
             left: auto;
             right: 1%;
             top: 1%;
             width: 25%;
         }
 
-    .page-101 .result {
+    .page-101 .result, .page-103 .result {
         left: 10%;
         top: 14%;
         width: 80%;
     }
 
-    .page-101 .using-time {
+    .page-101 .using-time, .page-103 .using-time {
         position: absolute;
         top: 1%;
         font-weight: bold;
@@ -223,27 +223,27 @@
         text-shadow: 5px 5px 5px #000;
     }
 
-        .page-101 .using-time.s {
+        .page-101 .using-time.s, .page-103 .using-time.s {
             left: 5%;
         }
 
-        .page-101 .using-time.a {
+        .page-101 .using-time.a, .page-103 .using-time.a {
             left: 5%;
         }
 
-        .page-101 .using-time.b {
+        .page-101 .using-time.b, .page-103 .using-time.b {
             left: 20%;
         }
 
-        .page-101 .using-time.c {
+        .page-101 .using-time.c, .page-103 .using-time.c {
             left: 35%;
         }
 
-        .page-101 .using-time.d {
+        .page-101 .using-time.d, .page-103 .using-time.d {
             left: 50%;
         }
 
-        .page-101 .using-time.e {
+        .page-101 .using-time.e, .page-103 .using-time.e {
             left: 50%;
         }
 
@@ -557,4 +557,35 @@
         width: 350px;
         height: 350px;
         border: 2px #fff solid;
+    }
+
+    .page-6 img.block {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        position: initial;
+        padding: 2px;
+        margin: 0;
+    }
+
+    .page-6 .row {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        position: initial;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .page-6 .using-time {
+        right: 3%;
+        top: 3%;
+        text-align: center;
+        position: absolute;
+        font-weight: bold;
+        font-size: 50px;
+        color: #fff;
+        -webkit-text-stroke: #000 3px;
+        text-shadow: 5px 5px 5px #000;
     }

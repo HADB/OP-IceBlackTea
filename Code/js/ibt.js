@@ -66,7 +66,6 @@ var gameOpen = {
     fourgame_shen_0503: null
 }
 
-
 var IBT = {
     gamePoint: 0,
 
@@ -76,7 +75,7 @@ var IBT = {
 
     effects: { moveUp: 1, moveDown: 2, fade: 3 },
 
-    results: { S: 1, A: 2, B: 3, C: 4, D: 5, E: 6, Failed: 0 },
+    results: { S: "S", A: "A", B: "B", C: "C", D: "D", E: "E", Failed: "F" },
 
     directions: { up: 1, down: -1 },
 
@@ -94,8 +93,6 @@ var IBT = {
 
     game1result: null,
 
-    game1LevelResult: null,
-
     game1TimeResult: 0,//上面的usingtime置零了
 
     game2result: null,
@@ -107,6 +104,40 @@ var IBT = {
     resultReturnPageNumber: 1,
 
     resultNextPageNumber: 1,
+
+    game3Data: [1, 2, 3, 4, 5, 6, 7, 8, 1, 7, 4, 5, 8, 3, 2, 6],
+
+    game3LastId: 0,
+
+    game3OutCount: 0,
+
+    game3end: false,
+
+    game3UsingTime: 0,
+
+    game3Result: null,
+
+    game3FlipCard: function (id) {
+        var targetImgSrc = "img/game-3/block-" + IBT.game3Data[id - 1] + ".png";
+        var originalImgSrc = "img/game-3/block-0.png";
+        var card = $("#block-" + id);
+        if (card.attr("src") == originalImgSrc) {
+            card.addClass("ani-flipOutY");
+            setTimeout(function () {
+                card.attr("src", targetImgSrc);
+                card.removeClass("ani-flipOutY");
+                card.addClass("ani-flipInY");
+            }, 500);
+        }
+        else if (!$("#block-" + id).hasClass("out")) {
+            card.addClass("ani-flipOutY");
+            setTimeout(function () {
+                card.attr("src", originalImgSrc);
+                card.removeClass("ani-flipOutY");
+                card.addClass("ani-flipInY");
+            }, 500);
+        }
+    },
 
     pageMove: function (effect, pageNumber) {
         var fromPage = ".page-" + IBT.currentPageNumber;
@@ -225,27 +256,21 @@ $(function () {
         if (IBT.game1ClickCount == 32) {
             if (IBT.game1ClickUsingTime < 6.1) {
                 IBT.game1result = IBT.results.S;
-                IBT.game1LevelResult = "S";
             }
             else if (IBT.game1ClickUsingTime < 7.1) {
                 IBT.game1result = IBT.results.A;
-                IBT.game1LevelResult = "A";
             }
             else if (IBT.game1ClickUsingTime < 8.1) {
                 IBT.game1result = IBT.results.B;
-                IBT.game1LevelResult = "B";
             }
             else if (IBT.game1ClickUsingTime < 9.1) {
                 IBT.game1result = IBT.results.C;
-                IBT.game1LevelResult = "C";
             }
             else if (IBT.game1ClickUsingTime < 10.1) {
                 IBT.game1result = IBT.results.D;
-                IBT.game1LevelResult = "D";
             }
             else {
                 IBT.game1result = IBT.results.E;
-                IBT.game1LevelResult = "E";
             }
             IBT.game1TimeResult = IBT.game1ClickUsingTime.toFixed(2);
             if (gamePlayed[GAME.game1.name] == false) {
@@ -288,21 +313,103 @@ $(function () {
     $(".page-5 .start").singleTap(function () {
         $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, 6);
-        
-        for (var i = 1; i <= 16; i++) {
+        startGame3Timer();
+        var totalWidth = HAOest.browser.screen.width;
+        var blocksWidth = totalWidth * 95 / 100;
+        var left = (totalWidth * 5 / 100 - 4) / 2;
+        var blockWidth = parseInt(blocksWidth / 4);
+        $(".page-6 .blocks").css("width", blocksWidth);
+        $(".page-6 .blocks").css("height", blocksWidth);
+        $(".page-6 .blocks").css("left", left + "px");
+        $(".page-6 .row").css("height", blockWidth);
+
+        for (var i = 1; i <= 4; i++) {
             var block = $("<img />");
             block.attr("id", "block-" + i);
             block.attr("class", "block");
-            block.attr("src", "img/game-3/block-" + i + ".png");
-            $(".page-6 .blocks").append(block);
+            block.attr("src", "img/game-3/block-0.png");
+            block.css("width", blockWidth)
+            $(".page-6 .blocks .row-1").append(block);
         }
+
+        for (var i = 5; i <= 8; i++) {
+            var block = $("<img />");
+            block.attr("id", "block-" + i);
+            block.attr("class", "block");
+            block.attr("src", "img/game-3/block-0.png");
+            block.css("width", blockWidth)
+            $(".page-6 .blocks .row-2").append(block);
+        }
+
+        for (var i = 9; i <= 12; i++) {
+            var block = $("<img />");
+            block.attr("id", "block-" + i);
+            block.attr("class", "block");
+            block.attr("src", "img/game-3/block-0.png");
+            block.css("width", blockWidth)
+            $(".page-6 .blocks .row-3").append(block);
+        }
+
+        for (var i = 13; i <= 16; i++) {
+            var block = $("<img />");
+            block.attr("id", "block-" + i);
+            block.attr("class", "block");
+            block.attr("src", "img/game-3/block-0.png");
+            block.css("width", blockWidth)
+            $(".page-6 .blocks .row-4").append(block);
+        }
+
+        $(".page-6 .block").singleTap(function (e) {
+            var id = e.target.id.replace(/block-/, "");
+            IBT.game3FlipCard(id);
+            if (IBT.game3LastId != 0) {
+                if (IBT.game3Data[id - 1] == IBT.game3Data[IBT.game3LastId - 1]) {
+                    IBT.game3OutCount += 2;
+                    console.log(IBT.game3OutCount);
+                    $("#block-" + id).addClass("out");
+                    $("#block-" + IBT.game3LastId).addClass("out");
+                    IBT.game3LastId = 0;
+                    if (IBT.game3OutCount == 16) {
+                        if (IBT.game3UsingTime < 5) {
+                            IBT.game3Result = IBT.results.S;
+                        }
+                        else if (IBT.game3UsingTime <= 8) {
+                            IBT.game3Result = IBT.results.A;
+                        }
+                        else if (IBT.game3UsingTime <= 11) {
+                            IBT.game3Result = IBT.results.B;
+                        }
+                        else if (IBT.game3UsingTime <= 14) {
+                            IBT.game3Result = IBT.results.C;
+                        }
+                        else if (IBT.game3UsingTime <= 17) {
+                            IBT.game3Result = IBT.results.D;
+                        }
+                        else {
+                            IBT.game3Result = IBT.results.E;
+                        }
+                        showResult(IBT.game3Result, 103, IBT.game3UsingTime.toFixed(2), 1001, 9999);
+                        IBT.game3end = true;
+                    }
+                }
+                else {
+                    setTimeout(function () {
+                        IBT.game3FlipCard(IBT.game3LastId);
+                        IBT.game3LastId = id;
+                    }, 1000);
+                }
+            }
+            else {
+                IBT.game3LastId = id;
+            }
+        });
     });
 
     $(".page-101 .button-return").singleTap(function () {
         $('#clickaudio')[0].play();
         //IBT.pageMove(IBT.effects.fade, IBT.resultReturnPageNumber);
         $('.game1-time-span').text(IBT.game1TimeResult + " S");
-        $('.game1-level-span').text(IBT.game1LevelResult);
+        $('.game1-level-span').text(IBT.game1result);
         IBT.pageMove(IBT.effects.fade, 1001);
     });
 
@@ -408,16 +515,27 @@ $(function () {
 //游戏1计时器
 function startGame1Timer() {
     setTimeout(function () {
-        //alert(IBT.game1end);
         if (!IBT.game1end) {
             IBT.game1ClickUsingTime += 0.01;
             $(".page-2 .using-time").html(IBT.game1ClickUsingTime.toFixed(2) + "s");
-            //      alert(IBT.game1ClickUsingTime.toFixed(2) );
             startGame1Timer();
         }
         else {
             IBT.game1ClickUsingTime = 0;
             $(".page-2 .using-time").html("0.00s");
+        }
+    }, 10);
+}
+
+function startGame3Timer() {
+    setTimeout(function () {
+        if (!IBT.game3end) {
+            IBT.game3UsingTime += 0.01;
+            $(".page-6 .using-time").html(IBT.game3UsingTime.toFixed(2));
+            startGame3Timer();
+        }
+        else {
+            IBT.game3UsingTime = 0;
         }
     }, 10);
 }
@@ -699,29 +817,24 @@ function getGameLevel(time, gameId) {
 function getGame1LevelByTime() {
     if (IBT.game1ClickUsingTime < 6.1) {
         IBT.game1result = IBT.results.S;
-        IBT.game1LevelResult = "S";
     }
     else if (IBT.game1ClickUsingTime < 7.1) {
         IBT.game1result = IBT.results.A;
-        IBT.game1LevelResult = "A";
     }
     else if (IBT.game1ClickUsingTime < 8.1) {
         IBT.game1result = IBT.results.B;
-        IBT.game1LevelResult = "B";
     }
     else if (IBT.game1ClickUsingTime < 9.1) {
         IBT.game1result = IBT.results.C;
-        IBT.game1LevelResult = "C";
     }
     else if (IBT.game1ClickUsingTime < 10.1) {
         IBT.game1result = IBT.results.D;
-        IBT.game1LevelResult = "D";
     }
     else {
         IBT.game1result = IBT.results.E;
-        IBT.game1LevelResult = "E";
     }
 }
+
 function submitScoreAgain() {
     setGamePoints();
 
