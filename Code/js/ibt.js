@@ -313,7 +313,7 @@ $(function () {
     $(".page-5 .start").singleTap(function () {
         $('#clickaudio')[0].play();
         IBT.pageMove(IBT.effects.fade, 6);
-        startGame3Timer();
+
         var totalWidth = HAOest.browser.screen.width;
         var blocksWidth = totalWidth * 95 / 100;
         var left = (totalWidth * 5 / 100 - 4) / 2;
@@ -360,10 +360,13 @@ $(function () {
         }
 
         $(".page-6 .block").singleTap(function (e) {
+            if (IBT.game3end) {
+                startGame3Timer();
+            }
             var id = e.target.id.replace(/block-/, "");
             IBT.game3FlipCard(id);
             if (IBT.game3LastId != 0) {
-                if (IBT.game3Data[id - 1] == IBT.game3Data[IBT.game3LastId - 1]) {
+                if (IBT.game3Data[id - 1] == IBT.game3Data[IBT.game3LastId - 1] && id != IBT.game3LastId) {
                     IBT.game3OutCount += 2;
                     console.log(IBT.game3OutCount);
                     $("#block-" + id).addClass("out");
