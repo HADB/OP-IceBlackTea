@@ -105,7 +105,7 @@ var IBT = {
 
     resultNextPageNumber: 1,
 
-    game3Data: [1, 2, 3, 4, 5, 6, 7, 8, 1, 7, 4, 5, 8, 3, 2, 6],
+    game3Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
     game3LastId: 0,
 
@@ -312,6 +312,20 @@ $(function () {
     //游戏三
     $(".page-5 .start").singleTap(function () {
         $('#clickaudio')[0].play();
+
+        //随机生成顺序
+        for (var i = 1; i <= 8; i++) {
+            var r = Math.floor(Math.random() * 16);
+            while (IBT.game3Data[r]) {
+                r = Math.floor(Math.random() * 16);
+            }
+            IBT.game3Data[r] = i;
+            while (IBT.game3Data[r]) {
+                r = Math.floor(Math.random() * 16);
+            }
+            IBT.game3Data[r] = i;
+        }
+
         IBT.pageMove(IBT.effects.fade, 6);
         startGame3Timer();
         var totalWidth = HAOest.browser.screen.width;
