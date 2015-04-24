@@ -395,7 +395,8 @@ $(function () {
                 else {
                     setTimeout(function () {
                         IBT.game3FlipCard(IBT.game3LastId);
-                        IBT.game3LastId = id;
+                        IBT.game3FlipCard(id);
+                        IBT.game3LastId = 0;
                     }, 1000);
                 }
             }
