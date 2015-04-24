@@ -113,6 +113,8 @@ var IBT = {
 
     game3end: false,
 
+    game3start: false,
+
     game3UsingTime: 0,
 
     game3Result: null,
@@ -374,13 +376,19 @@ $(function () {
         }
 
         $(".page-6 .block").singleTap(function (e) {
-            if (IBT.game3end) {
+            if (!IBT.game3start) {
                 startGame3Timer();
+                IBT.game3start = true;
             }
             var id = e.target.id.replace(/block-/, "");
             IBT.game3FlipCard(id);
             if (IBT.game3LastId != 0) {
-                if (IBT.game3Data[id - 1] == IBT.game3Data[IBT.game3LastId - 1] && id != IBT.game3LastId) {
+                if (id == IBT.game3LastId) {
+                    IBT.game3LastId = 0;
+                    return;
+                }
+
+                if (IBT.game3Data[id - 1] == IBT.game3Data[IBT.game3LastId - 1]) {
                     IBT.game3OutCount += 2;
                     console.log(IBT.game3OutCount);
                     $("#block-" + id).addClass("out");
