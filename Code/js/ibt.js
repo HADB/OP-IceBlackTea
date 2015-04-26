@@ -376,18 +376,16 @@ $(function () {
         }
 
         $(".page-6 .block").singleTap(function (e) {
+            var id = e.target.id.replace(/block-/, "");
+            if ($("#block-" + id).hasClass("out") || id == IBT.game3LastId) {
+                return;
+            }
             if (!IBT.game3start) {
                 startGame3Timer();
                 IBT.game3start = true;
             }
-            var id = e.target.id.replace(/block-/, "");
             IBT.game3FlipCard(id);
             if (IBT.game3LastId != 0) {
-                if (id == IBT.game3LastId) {
-                    IBT.game3LastId = 0;
-                    return;
-                }
-
                 if (IBT.game3Data[id - 1] == IBT.game3Data[IBT.game3LastId - 1]) {
                     IBT.game3OutCount += 2;
                     console.log(IBT.game3OutCount);
