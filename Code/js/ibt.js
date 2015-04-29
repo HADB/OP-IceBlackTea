@@ -142,33 +142,36 @@ var IBT = {
     },
 
     pageMove: function (effect, pageNumber) {
-        var fromPage = ".page-" + IBT.currentPageNumber;
-        var toPage = ".page-" + pageNumber;
-        IBT.currentPageNumber = pageNumber;
+        if (!IBT.isAnimating) {
+            IBT.isAnimating = true;
+            var fromPage = ".page-" + IBT.currentPageNumber;
+            var toPage = ".page-" + pageNumber;
+            IBT.currentPageNumber = pageNumber;
 
-        switch (effect) {
-            case IBT.effects.fade:
-                outClass = 'ani-fadeOut';
-                inClass = 'ani-fadeIn';
-                break;
+            switch (effect) {
+                case IBT.effects.fade:
+                    outClass = 'ani-fadeOut';
+                    inClass = 'ani-fadeIn';
+                    break;
+            }
+
+            $(toPage).removeClass("hide");
+            $(fromPage).addClass(outClass);
+            $(toPage).addClass(inClass);
+
+            setTimeout(function () {
+                $(fromPage).removeClass('page-current');
+                $(fromPage).removeClass(outClass);
+                $(fromPage).addClass("hide");
+                $(fromPage).find("*").addClass("hide");
+
+                $(toPage).addClass('page-current');
+                $(toPage).removeClass(inClass);
+                $(toPage).find("*").removeClass("hide");
+
+                IBT.isAnimating = false;
+            }, 600);
         }
-        IBT.isAnimating = true;
-        $(toPage).removeClass("hide");
-        $(fromPage).addClass(outClass);
-        $(toPage).addClass(inClass);
-
-        setTimeout(function () {
-            $(fromPage).removeClass('page-current');
-            $(fromPage).removeClass(outClass);
-            $(fromPage).addClass("hide");
-            $(fromPage).find("*").addClass("hide");
-
-            $(toPage).addClass('page-current');
-            $(toPage).removeClass(inClass);
-            $(toPage).find("*").removeClass("hide");
-
-            IBT.isAnimating = false;
-        }, 600);
     },
 
     loadComplete: function () {
